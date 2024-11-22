@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MedlemsRegistering {
 
-    private static final String FILNAVN = "src/Medlem,mer.txt";
+    private static final String FILNAVN = "src/Medlemmer.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
@@ -19,6 +19,7 @@ public class MedlemsRegistering {
         Scanner sc = new Scanner(System.in);
         String svømmekategori;
         String kontigent;
+        int pris;
 
         int medlemsId= findMaxMedlemsId()+1;
 
@@ -30,10 +31,13 @@ public class MedlemsRegistering {
         sc.nextLine();
         if (alder<=17){
             svømmekategori="Junior";
+            pris=1000;
         } else if (alder<=60) {
             svømmekategori="Senior";
+            pris=1600;
         } else {
             svømmekategori="60+";
+            pris=1200;
         }
 
         System.out.println("Indtast Medlemmets type (Aktiv/Passiv):");
@@ -42,9 +46,10 @@ public class MedlemsRegistering {
             type=AKTIV;
         } else {
             type=PASSIV;
+            pris=500;
         }
 
-        System.out.println("Vil du med betale kontigent nu eller senere? Nu/Senere");
+        System.out.println("Årlig kontigent pris er: "+pris+" kr. Vil du med betale kontigent nu eller senere? Nu/Senere");
         String betalt = sc.nextLine();
         if (betalt.equalsIgnoreCase("Nu")){
             kontigent="Betalt";
@@ -89,9 +94,6 @@ public class MedlemsRegistering {
     }
 
 
-
-
-
     public static void visMedlemmer() {
         try {
             List<String> linjer = Files.readAllLines(Paths.get(FILNAVN));
@@ -130,5 +132,3 @@ public class MedlemsRegistering {
         }
     }
 }
-
-a
