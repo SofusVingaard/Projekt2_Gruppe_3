@@ -1,0 +1,2 @@
+public class Svømmehold {
+}
