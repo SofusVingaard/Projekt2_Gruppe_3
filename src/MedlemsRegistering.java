@@ -9,26 +9,52 @@ import java.util.Scanner;
 public class MedlemsRegistering {
 
     private static final String FILNAVN = "src/Medlemmer.txt";
+    private static final String NAVN= "Navn: ";
+    private static final String ALDER="Alder: ";
+    private static final String AKTIV="Medlemsskab: Aktiv";
+    private static final String PASSIV="Medlemsskab: Passiv";
 
     public static void tilføjMedlem() {
         Scanner sc = new Scanner(System.in);
+        String svømmekategori;
+        String kontigent;
 
         System.out.println("Indtast Medlemmets navn:");
         String navn = sc.nextLine();
 
         System.out.println("Indtast Medlemmets  alder:");
-        String alder = sc.nextLine();
+        int alder = sc.nextInt();
+        sc.nextLine();
+        if (alder<=17){
+            svømmekategori="Junior";
+        } else if (alder<=60) {
+            svømmekategori="Senior";
+        } else {
+            svømmekategori="60+";
+        }
 
         System.out.println("Indtast Medlemmets type (Aktiv/Passiv):");
         String type = sc.nextLine();
+        if (type.equalsIgnoreCase("Aktiv")){
+            type=AKTIV;
+            System.out.println("Er du intereseret ");
+        } else {
+            type=PASSIV;
+        }
 
-        System.out.println("Indtast Medlemmets svømmekategori(Junior,Senior,Motionist,Konkurrence):");
-        String svømmekategori = sc.nextLine();
+        //System.out.println("Indtast Medlemmets svømmekategori(Junior, Senior, Motionist, Konkurrence):");
+        //String svømmekategori = sc.nextLine();
 
-        System.out.println("Har medlemmet betalt kontigent?");
+        System.out.println("Vil du med betale kontigent nu eller senere? Nu/Senere");
         String betalt = sc.nextLine();
+        if (betalt.equalsIgnoreCase("Nu")){
+            kontigent="Betalt";
+        } else {
+            kontigent="Ikke betalt";
+        }
 
-        String medlemdata = navn + ", " + alder + ", " + type + ", " + svømmekategori + ", " + betalt;
+
+        String medlemdata = NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN, true))) {
             writer.write(medlemdata);
