@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MedlemsRegistering {
-
+    //Klasse bibliotek
     private static final String FILNAVN = "src/Medlemmer.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
@@ -31,66 +31,64 @@ public class MedlemsRegistering {
         sc.nextLine();
         if (alder<=17){
             svømmekategori="Junior";
+            // De her linjer bruges til at ændre vores kontigent pris i programmet fra et tekst dokument
+            // så det er nemmere for svømmeklubben at ændre prisen uden at skulle ændre src kode
             try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
+                        // Søger efter en linje hvor Junior indgår
                     if (line.startsWith("Junior")) {
                         // Extract medlemsID from the line
+                        // Hver bid skilles ved mellemrum
                         String[] parts = line.split(" ");
                         try {
-                            int currentId = Integer.parseInt(parts[1]);
-                            if (currentId > pris) {
-                                pris = currentId;
-                            }
+                            //Tager bid nummer 2 i linjen og gør "int pris" til den værdi
+                            int kontigentPris = Integer.parseInt(parts[1]);
+                            pris=kontigentPris;
                         } catch (NumberFormatException e) {
-                            // If the ID is not a valid number, skip it
                         }
                     }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            //pris=1000;
         } else if (alder<=60) {
             svømmekategori="Senior";
+                // læs kommentar fra junior
             try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Senior")) {
-                        // Extract medlemsID from the line
                         String[] parts = line.split(" ");
                         try {
-                            int currentId = Integer.parseInt(parts[1]);
-                            pris=currentId;
+                            int kontigentPris = Integer.parseInt(parts[1]);
+                            pris=kontigentPris;
                         } catch (NumberFormatException e) {
-                            // If the ID is not a valid number, skip it
                         }
                     }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            //pris=1600;
         } else {
             svømmekategori="60+";
+                // læs kommentar fra junior
             try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Senior")) {
-                        // Extract medlemsID from the line
+
                         String[] parts = line.split(" ");
                         try {
-                            int currentId = Integer.parseInt(parts[1]);
-                            pris=currentId*0.75;
+                            int kontigentPris = Integer.parseInt(parts[1]);
+                            pris=kontigentPris*0.75;
                         } catch (NumberFormatException e) {
-                            // If the ID is not a valid number, skip it
                         }
                     }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            //pris=1200;
         }
 
         System.out.println("Indtast Medlemmets type (Aktiv/Passiv):");
@@ -99,24 +97,22 @@ public class MedlemsRegistering {
             type=AKTIV;
         } else {
             type=PASSIV;
+            // læs kommentar fra junior
             try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Passiv")) {
-                        // Extract medlemsID from the line
                         String[] parts = line.split(" ");
                         try {
-                            int currentId = Integer.parseInt(parts[1]);
-                            pris=currentId;
+                            int kontigentPris = Integer.parseInt(parts[1]);
+                            pris=kontigentPris;
                         } catch (NumberFormatException e) {
-                            // If the ID is not a valid number, skip it
                         }
                     }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            //pris=500;
         }
 
         System.out.println("Årlig kontigent pris er: "+pris+" kr. Vil du med betale kontigent nu eller senere? Nu/Senere");
@@ -127,11 +123,10 @@ public class MedlemsRegistering {
             kontigent="Ikke betalt";
         }
 
-
-        String medlemdata = MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
+        String medlemData = MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN, true))) {
-            writer.write(medlemdata);
+            writer.write(medlemData);
             writer.newLine();
             System.out.println("Medlemmet er registreret med ID: " + medlemsId);
         } catch (IOException e) {
@@ -145,7 +140,7 @@ public class MedlemsRegistering {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith(MEDLEMSID)) {
-                    // Extract medlemsID from the line
+                    // Finder medlemsID fra linjen
                     String[] parts = line.split(" ");
                     try {
                         int currentId = Integer.parseInt(parts[1]);
@@ -153,7 +148,7 @@ public class MedlemsRegistering {
                             maxId = currentId;
                         }
                     } catch (NumberFormatException e) {
-                        // If the ID is not a valid number, skip it
+                        // Hvis ikke et rigtig id, så spring over
                     }
                 }
             }
@@ -191,13 +186,15 @@ public class MedlemsRegistering {
             int valg = scanner.nextInt();
 
             switch (valg) {
-                case 1 -> tilføjMedlem();
-                case 2 -> visMedlemmer();
-                case 3 -> {
+                case 1: tilføjMedlem(); break;
+                case 2: visMedlemmer();
+                    System.out.println();break;
+
+                case 3: {
                     System.out.println("Afslutter programmet.");
                     return;
                 }
-                default -> System.out.println("Ugyldigt valg, prøv igen.");
+                default: System.out.println("Ugyldigt valg, prøv igen.");
             }
         }
     }
