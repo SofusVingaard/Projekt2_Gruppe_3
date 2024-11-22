@@ -14,8 +14,6 @@ public class MedlemsRegistering {
     private static final String AKTIV="Medlemsskab: Aktiv";
     private static final String PASSIV="Medlemsskab: Passiv";
 
-
-
     public static void tilføjMedlem() {
         Scanner sc = new Scanner(System.in);
         String svømmekategori;
