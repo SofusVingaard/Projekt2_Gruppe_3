@@ -7,7 +7,7 @@ public class MåløvDolphins {
         JFrame frame = new JFrame("Billede Display");
 
         // Læs billede fra filsystemet
-        ImageIcon imageIcon = new ImageIcon("src/miami dolphins.jpg"); // Sørg for at angive den korrekte sti
+        ImageIcon imageIcon = new ImageIcon("src/Måløv dolphins.jpg"); // Sørg for at angive den korrekte sti
 
         // Oprette JLabel og tilføje billedet
         JLabel label = new JLabel(imageIcon);
