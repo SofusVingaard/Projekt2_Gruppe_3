@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class MedlemsRegistering {
 
-    public static final String FILNAVN = "src/Medlemmer.txt";
+    private static final String FILNAVN = "src/Medlemmer.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
@@ -65,24 +65,6 @@ public class MedlemsRegistering {
         }
     }
 
-    public static void tilføjHold()  {
-    while (true) {
-        Scanner keyboard = new Scanner(System.in);
-        System.out.println("Vælg et af tre hold");
-        System.out.println("1. Crawl");
-        System.out.println("2. Butterfly");
-        System.out.println("3. Ryg");
-        System.out.println("4. Bryst");
-
-        int valg = keyboard.nextInt();
-
-        switch (valg){
-
-            case 1 -> 
-            }
-        }
-    }
-
     public static void visMedlemmer() {
         try {
             List<String> linjer = Files.readAllLines(Paths.get(FILNAVN));
@@ -105,16 +87,14 @@ public class MedlemsRegistering {
             System.out.println("Vælg en mulighed:");
             System.out.println("1. Tilføj nyt medlem");
             System.out.println("2. Vis alle medlemmer");
-            System.out.println("3. Tilmeld et hold");
-            System.out.println("4. Afslut");
+            System.out.println("3. Afslut");
 
             int valg = scanner.nextInt();
 
             switch (valg) {
                 case 1 -> tilføjMedlem();
                 case 2 -> visMedlemmer();
-                case 3 -> tilføjHold();
-                case 4 -> {
+                case 3 -> {
                     System.out.println("Afslutter programmet.");
                     return;
                 }
