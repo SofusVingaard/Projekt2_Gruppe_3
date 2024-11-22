@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MedlemsRegistering {
 
-    private static final String FILNAVN = "src/Medlem,mer.txt";
+    private static final String FILNAVN = "src/Medlemmer.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
@@ -121,7 +121,8 @@ public class MedlemsRegistering {
             switch (valg) {
                 case 1 -> tilføjMedlem();
                 case 2 -> visMedlemmer();
-                case 3 -> {
+                case 3 ->
+                {
                     System.out.println("Afslutter programmet.");
                     return;
                 }
@@ -130,5 +131,3 @@ public class MedlemsRegistering {
         }
     }
 }
-
-a
