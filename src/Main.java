@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        MåløvDolphins.main(args);
         System.out.println("Velkommen til Svømmeklubbben Målev Dolphins");
 
         Scanner keyboard = new Scanner(System.in);
