@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,16 +8,21 @@ import java.util.stream.Collectors;
 
 public class MedlemsRegistering {
 
-    private static final String FILNAVN = "src/Medlemmer.txt";
+    private static final String FILNAVN = "src/Medlem,mer.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
     private static final String PASSIV="Medlemsskab: Passiv";
+    private static final String MEDLEMSID="Medlemsnummer: ";
+
+
 
     public static void tilføjMedlem() {
         Scanner sc = new Scanner(System.in);
         String svømmekategori;
         String kontigent;
+
+        int medlemsId= findMaxMedlemsId()+1;
 
         System.out.println("Indtast Medlemmets navn:");
         String navn = sc.nextLine();
@@ -39,13 +42,9 @@ public class MedlemsRegistering {
         String type = sc.nextLine();
         if (type.equalsIgnoreCase("Aktiv")){
             type=AKTIV;
-            System.out.println("Er du intereseret ");
         } else {
             type=PASSIV;
         }
-
-        //System.out.println("Indtast Medlemmets svømmekategori(Junior, Senior, Motionist, Konkurrence):");
-        //String svømmekategori = sc.nextLine();
 
         System.out.println("Vil du med betale kontigent nu eller senere? Nu/Senere");
         String betalt = sc.nextLine();
@@ -56,16 +55,44 @@ public class MedlemsRegistering {
         }
 
 
-        String medlemdata = NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
+        String medlemdata = MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN, true))) {
             writer.write(medlemdata);
             writer.newLine();
-            System.out.println("Medlemmet er registreret");
+            System.out.println("Medlemmet er registreret med ID: " + medlemsId);
         } catch (IOException e) {
             System.out.println("Fejl ved skrivning til fil:");
         }
     }
+
+    private static int findMaxMedlemsId() {
+        int maxId = 1;
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILNAVN))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith(MEDLEMSID)) {
+                    // Extract medlemsID from the line
+                    String[] parts = line.split(" ");
+                    try {
+                        int currentId = Integer.parseInt(parts[1]);
+                        if (currentId > maxId) {
+                            maxId = currentId;
+                        }
+                    } catch (NumberFormatException e) {
+                        // If the ID is not a valid number, skip it
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Fejl ved læsning af fil:");
+        }
+        return maxId;
+    }
+
+
+
+
 
     public static void visMedlemmer() {
         try {
