@@ -3,3 +3,4 @@ Medlemsnummer: 2 Navn: Thommy, Alder: 69, Medlemsskab: Aktiv, Aldersgruppe: 60+,
 Medlemsnummer: 3 Navn: Sofus, Alder: 27, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 4 Navn: Sofus , Alder: 34, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt
 Medlemsnummer: 5 Navn: Christoffer, Alder: 40, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt
+Medlemsnummer: 6 Navn: Charles, Alder: 69, Medlemsskab: Aktiv, Aldersgruppe: 60+, Betalt

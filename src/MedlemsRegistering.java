@@ -19,7 +19,7 @@ public class MedlemsRegistering {
         Scanner sc = new Scanner(System.in);
         String svømmekategori;
         String kontigent;
-        int pris;
+        double pris = 0;
 
         int medlemsId= findMaxMedlemsId()+1;
 
@@ -31,13 +31,66 @@ public class MedlemsRegistering {
         sc.nextLine();
         if (alder<=17){
             svømmekategori="Junior";
-            pris=1000;
+            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("Junior")) {
+                        // Extract medlemsID from the line
+                        String[] parts = line.split(" ");
+                        try {
+                            int currentId = Integer.parseInt(parts[1]);
+                            if (currentId > pris) {
+                                pris = currentId;
+                            }
+                        } catch (NumberFormatException e) {
+                            // If the ID is not a valid number, skip it
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            //pris=1000;
         } else if (alder<=60) {
             svømmekategori="Senior";
-            pris=1600;
+            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("Senior")) {
+                        // Extract medlemsID from the line
+                        String[] parts = line.split(" ");
+                        try {
+                            int currentId = Integer.parseInt(parts[1]);
+                            pris=currentId;
+                        } catch (NumberFormatException e) {
+                            // If the ID is not a valid number, skip it
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            //pris=1600;
         } else {
             svømmekategori="60+";
-            pris=1200;
+            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("Senior")) {
+                        // Extract medlemsID from the line
+                        String[] parts = line.split(" ");
+                        try {
+                            int currentId = Integer.parseInt(parts[1]);
+                            pris=currentId*0.75;
+                        } catch (NumberFormatException e) {
+                            // If the ID is not a valid number, skip it
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            //pris=1200;
         }
 
         System.out.println("Indtast Medlemmets type (Aktiv/Passiv):");
@@ -46,7 +99,24 @@ public class MedlemsRegistering {
             type=AKTIV;
         } else {
             type=PASSIV;
-            pris=500;
+            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.startsWith("Passiv")) {
+                        // Extract medlemsID from the line
+                        String[] parts = line.split(" ");
+                        try {
+                            int currentId = Integer.parseInt(parts[1]);
+                            pris=currentId;
+                        } catch (NumberFormatException e) {
+                            // If the ID is not a valid number, skip it
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            //pris=500;
         }
 
         System.out.println("Årlig kontigent pris er: "+pris+" kr. Vil du med betale kontigent nu eller senere? Nu/Senere");
