@@ -1,8 +1,10 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MedlemsRegistering {
 
@@ -112,6 +114,11 @@ public class MedlemsRegistering {
             System.out.println("Fejl ved læsning af fil: " + e.getMessage());
         }
     }
+
+
+    public Restance() throws IOException {
+    }
+}
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -119,19 +126,39 @@ public class MedlemsRegistering {
             System.out.println("Vælg en mulighed:");
             System.out.println("1. Tilføj nyt medlem");
             System.out.println("2. Vis alle medlemmer");
-            System.out.println("3. Afslut");
+            System.out.println("3. Vis medlemmer i restance");
+            System.out.println("4. Afslut");
 
             int valg = scanner.nextInt();
 
             switch (valg) {
                 case 1 -> tilføjMedlem();
                 case 2 -> visMedlemmer();
-                case 3 -> {
+                case 3 ->
+                case 4 -> {
                     System.out.println("Afslutter programmet.");
                     return;
                 }
                 default -> System.out.println("Ugyldigt valg, prøv igen.");
             }
+        }
+    }
+public class Restance{
+
+    public void restance () throws Exception {
+
+
+        //læse alle linjer i vores fil
+        List<String> linjer = Files.readAllLines(Path.of(FILNAVN));
+//nu skal jeg filtre alle de linjer som indeholder "Ikke betalt"
+        List<String> restance = linjer.stream()
+                .filter(linje -> linje.contains("ikke betalt"))
+                .collect(Collectors.toList());
+        // Hvis der ikke er nogen "Ikke betalt"
+        if (restance.isEmpty()) {
+            System.out.println("Fuld indtjening");
+        } else {
+            System.out.println("Der er restance: " + restance);
         }
     }
 }
