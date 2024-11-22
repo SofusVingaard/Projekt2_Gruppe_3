@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MedlemsRegistering {
 
-    private static final String FILNAVN = "src/Medlem,mer.txt";
+    private static final String FILNAVN = "src/Medlemmer.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
@@ -130,5 +130,3 @@ public class MedlemsRegistering {
         }
     }
 }
-
-a
