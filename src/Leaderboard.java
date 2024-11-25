@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Leaderboard {
 
-    private static final String FILNAVN = "Leaderboard.txt";
+    private static final String FILNAVN = "src/Leaderboard.txt";
 
     public static void tilføjEllerOpdaterTid(String navn, String disciplin, double tid) {
         Map<String, Map<String, Double>> leaderboard = læsLeaderboard();

@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class MedlemsRegistering {
     //Klasse bibliotek
     private static final String FILNAVN = "src/Medlemmer.txt";
+    private static final String KONTIGENT= "src/KontigentPriser.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
@@ -33,7 +34,7 @@ public class MedlemsRegistering {
             svømmekategori="Junior";
             // De her linjer bruges til at ændre vores kontigent pris i programmet fra et tekst dokument
             // så det er nemmere for svømmeklubben at ændre prisen uden at skulle ændre src kode
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                         // Søger efter en linje hvor Junior indgår
@@ -55,7 +56,7 @@ public class MedlemsRegistering {
         } else if (alder<=60) {
             svømmekategori="Senior";
                 // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Senior")) {
@@ -73,7 +74,7 @@ public class MedlemsRegistering {
         } else {
             svømmekategori="60+";
                 // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Senior")) {
@@ -98,7 +99,7 @@ public class MedlemsRegistering {
         } else {
             type=PASSIV;
             // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Passiv")) {
