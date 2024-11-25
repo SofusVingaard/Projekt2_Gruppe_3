@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MåløvDolphins {
-    public static void main(String[] args) {
+        public class MåløvDolphins {
+        public static void main(String[] args) {
         // Oprette JFrame vindue
         JFrame frame = new JFrame("Billede Display");
 

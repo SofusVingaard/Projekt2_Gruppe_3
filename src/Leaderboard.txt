@@ -1,1 +1,3 @@
-thomas;ryg:10.2, r:10.25, b:10.1, butterfly:13.25, crawl:12.45
+sofus:crawl:1.0
+thomas:ryg:10.2, r:10.25, b:10.1, butterfly:13.25, crawl:12.45
+Sofus:Crawl:15.0
