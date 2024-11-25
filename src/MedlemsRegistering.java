@@ -13,6 +13,11 @@ public class MedlemsRegistering {
     private static final String AKTIV="Medlemsskab: Aktiv";
     private static final String PASSIV="Medlemsskab: Passiv";
     private static final String MEDLEMSID="Medlemsnummer: ";
+    private static final String KONKURRENCE="src/Konkurrence stævner";
+    private static final String BRYST= "Bryst";
+    private static final String CRAWL="Crawl";
+    private static final String BUTTERFLY= "Butterfly";
+    private static final String RYG= "Ryg";
 
 
     // Metode til at tilføje medlemmer
@@ -135,6 +140,67 @@ public class MedlemsRegistering {
         }
     }
 
+    public static void konkurrenceStævne() {
+        Scanner keyboard = new Scanner(System.in);
+        String stævne;
+        String navn;
+        String disciplin;
+        int placering;
+        double speedo;
+        String stævnePlacering;
+        String yapping;
+        boolean keepSwimming = true;
+        try (BufferedReader reader = new BufferedReader(new FileReader(KONKURRENCE))) {
+            System.out.println("Indtast navn på stævne");
+            stævne = keyboard.nextLine();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
+                writer.newLine();
+                writer.write(stævne);
+                writer.newLine();
+                }
+                catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);}
+
+                while (keepSwimming) {
+                    System.out.println("indtast navn svømmer");
+                    navn = keyboard.nextLine();
+                    System.out.println("Indtast disciplin. (" + RYG + "," + CRAWL + "," + BRYST + "," + BUTTERFLY);
+                    disciplin = keyboard.nextLine();
+                    if (disciplin.equalsIgnoreCase(RYG) || disciplin.equalsIgnoreCase(CRAWL) || disciplin.equalsIgnoreCase(BRYST) || disciplin.equalsIgnoreCase(BUTTERFLY)) {
+                        System.out.println("Indtast placering");
+                        placering = keyboard.nextInt();
+                        keyboard.nextLine();
+                        System.out.println("Hvor hurtigt svømmede personen?");
+                        speedo = keyboard.nextInt();
+                        keyboard.nextLine();
+
+                        stævnePlacering = navn + " " + disciplin + " " + placering + " " + speedo;
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
+                            writer.write(stævnePlacering);
+                            writer.newLine();
+                            System.out.println("Placeringen er blevet registreret til stævne " + stævne);
+
+                        } catch (IOException t) {
+                            throw new RuntimeException(t);
+                        }
+                        System.out.println("Vil du registrere flere svømme? (Ja/Nej)");
+                        yapping = keyboard.nextLine();
+                        if (yapping.equalsIgnoreCase("Ja")) {
+                            continue;
+                        } else keepSwimming = false;
+
+                    } else System.out.println("Ugyldig disciplin");
+
+                }
+
+            }
+
+
+
     private static int findMaxMedlemsId() {
         int maxId = 1;
         try (BufferedReader reader = new BufferedReader(new FileReader(FILNAVN))) {
@@ -160,6 +226,7 @@ public class MedlemsRegistering {
     }
 
 
+
     public static void visMedlemmer() {
         try {
             List<String> linjer = Files.readAllLines(Paths.get(FILNAVN));
@@ -177,6 +244,7 @@ public class MedlemsRegistering {
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        konkurrenceStævne();
 
         while (true) {
             System.out.println("Vælg en mulighed:");
