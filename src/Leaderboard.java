@@ -5,6 +5,10 @@ import java.util.*;
 public class Leaderboard {
 
     private static final String FILNAVN = "src/Leaderboard.txt";
+    private static final String BRYST= "Bryst";
+    private static final String CRAWL="Crawl";
+    private static final String BUTTERFLY= "Butterfly";
+    private static final String RYG= "Ryg";
 
     public static void tilføjEllerOpdaterTid(String navn, String disciplin, double tid) {
         Map<String, Map<String, Double>> leaderboard = læsLeaderboard();
@@ -52,7 +56,7 @@ public class Leaderboard {
 
                 String[] disciplinerData = dele[1].split(", ");
                 for (String disciplinTid : disciplinerData) {
-                    String[] data = disciplinTid.split(":");
+                    String[] data = disciplinTid.split(": ");
                     String disciplin = data[0];
                     double tid = Double.parseDouble(data[1]);
                     discipliner.put(disciplin, tid);
@@ -72,7 +76,7 @@ public class Leaderboard {
                 String navn = entry.getKey();
                 Map<String, Double> discipliner = entry.getValue();
 
-                StringBuilder linje = new StringBuilder(navn + ";");
+                StringBuilder linje = new StringBuilder(navn + ": ");
                 discipliner.forEach((disciplin, tid) -> linje.append(disciplin).append(":").append(tid).append(", "));
 
                 linje.setLength(linje.length() - 2);
@@ -103,8 +107,16 @@ public class Leaderboard {
                 case 1 -> {
                     System.out.println("Indtast navn:");
                     String navn = scanner.nextLine();
-                    System.out.println("Indtast disciplin (crawl, butterfly, ryg, bryst):");
+                    System.out.println("Indtast disciplin ("+CRAWL+","+RYG+","+BUTTERFLY+","+BRYST+"):");
                     String disciplin = scanner.nextLine();
+                    if (disciplin.equalsIgnoreCase(BRYST) || disciplin.equalsIgnoreCase(RYG)|| disciplin.equalsIgnoreCase(BUTTERFLY)|| disciplin.equalsIgnoreCase(CRAWL)){
+                        System.out.println("korrekt");
+                    }
+                    else {
+                        System.out.println("Ugyldigt input, du sendes tilbage til start menuen");
+                        System.out.println();
+                        continue;
+                    }
                     System.out.println("Indtast tid:");
                     String tidInput = scanner.nextLine();
                     tidInput = tidInput.replace(",", ".");

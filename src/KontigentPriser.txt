@@ -1,3 +1,3 @@
 Junior: 1000
 Senior: 1600
-passiv: 500
+Passiv: 500
