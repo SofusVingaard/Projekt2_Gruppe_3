@@ -46,6 +46,7 @@ public class Main {
                 case 4:
                     Leaderboard.visLeaderboard();
                 case 5:
+                    Leaderboard.main(args);
 
                 case 6:
                     Restanse.restance();
