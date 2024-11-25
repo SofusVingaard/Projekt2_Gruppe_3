@@ -1,7 +1,6 @@
-Sofus, 27, aktiv, senior, ja
-Navn: Torsten, Alder:19, Medlemsskab: Passiv, Senior, Ikke betalt
-Navn: Gulle, Alder: 17, Medlemsskab: Passiv, Junior, Ikke betalt
-Navn: Diddy, Alder: 69, Medlemsskab: Passiv, Aldersgruppe: 60+, Ikke betalt
-Navn: Kris, Alder: 25, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt
-Navn: 3, Alder: 3, Medlemsskab: Passiv, Aldersgruppe: Junior, Ikke betalt
-Navn: thomas, Alder: 23, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
+Medlemsnummer: 1 Navn: Margit, Alder: 32, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
+Medlemsnummer: 2 Navn: Thommy, Alder: 69, Medlemsskab: Aktiv, Aldersgruppe: 60+, Betalt
+Medlemsnummer: 3 Navn: Sofus, Alder: 27, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
+Medlemsnummer: 4 Navn: Sofus, Alder: 34, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt
+Medlemsnummer: 5 Navn: Christoffer, Alder: 40, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt
+Medlemsnummer: 6 Navn: Charles, Alder: 69, Medlemsskab: Aktiv, Aldersgruppe: 60+, Betalt
