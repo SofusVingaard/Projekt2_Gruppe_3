@@ -87,7 +87,7 @@ public class Leaderboard {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

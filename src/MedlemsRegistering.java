@@ -15,7 +15,7 @@ public class MedlemsRegistering {
     private static final String MEDLEMSID="Medlemsnummer: ";
 
 
-
+    // Metode til at tilføje medlemmer
     public static void tilføjMedlem() {
         Scanner sc = new Scanner(System.in);
         String svømmekategori;
@@ -23,7 +23,7 @@ public class MedlemsRegistering {
         double pris = 0;
 
         int medlemsId= findMaxMedlemsId()+1;
-
+        //Indtast medlemmets information
         System.out.println("Indtast Medlemmets navn:");
         String navn = sc.nextLine();
 
@@ -125,7 +125,7 @@ public class MedlemsRegistering {
         }
 
         String medlemData = MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
-
+            //BufferedWriter skriver medlemsData ind i tekst filen Medlemmer
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN, true))) {
             writer.write(medlemData);
             writer.newLine();

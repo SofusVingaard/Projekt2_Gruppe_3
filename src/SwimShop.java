@@ -57,7 +57,7 @@ public class SwimShop {
                 productCost = 400;
                 break;
             case 5:
-                productCost = 5;
+                productCost = 50;
                 break;
             case 0:
                 productCost = 0;

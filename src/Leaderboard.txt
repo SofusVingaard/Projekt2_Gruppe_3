@@ -1,1 +1,1 @@
-thomas;ryg:10.2, r:10.25, b:10.1, butterfly:13.25, crawl:12.45
+thomas;ryg:10.2, r:10.25, b:10.1, butterfly:13.25, crawl:10.0
