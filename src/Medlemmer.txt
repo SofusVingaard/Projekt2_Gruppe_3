@@ -3,3 +3,5 @@ Navn: Torsten, Alder:19, Medlemsskab: Passiv, Senior, Ikke betalt
 Navn: Gulle, Alder: 17, Medlemsskab: Passiv, Junior, Ikke betalt
 Navn: Diddy, Alder: 69, Medlemsskab: Passiv, Aldersgruppe: 60+, Ikke betalt
 Navn: Kris, Alder: 25, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt
+Navn: 3, Alder: 3, Medlemsskab: Passiv, Aldersgruppe: Junior, Ikke betalt
+Navn: thomas, Alder: 23, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
