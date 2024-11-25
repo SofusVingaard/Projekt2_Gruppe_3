@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Svømmehold {
+/* public class Svømmehold {
 
     private static final String FILNAVN = "srcMedlem,mer.txt";
     boolean svømmehold = true;
@@ -25,6 +25,6 @@ public class Svømmehold {
 
 
         }
-    }
 
 
+*/

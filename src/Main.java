@@ -14,10 +14,11 @@ public class Main {
             System.out.println("1: Se åbningstider:");
             System.out.println("2: Opret medlem:");
             System.out.println("3: Se medlemmer:");
-            System.out.println("4: Se top 5 inden for deciplin:");
-            System.out.println("5: Opdater pb:");
+            System.out.println("4: Gå til leaderboard:");
+            System.out.println("5: ");
             System.out.println("6: Se om medlemmer er i restanse");
             System.out.println("7: Køb dailyPass til svømmehallen");
+            System.out.println("8: Køb vare  i SwipShop");
             System.out.println("0: Luk Programmet:");
             tast = keyboard.nextInt();
             //clear vores scanner buffer
@@ -27,7 +28,7 @@ public class Main {
                 System.out.println("Tak for i dag");
                 keepGoing = false;
 
-            } else if (tast >= 8) {
+            } else if (tast >= 9) {
                 System.out.println("ugyldigt");
                 return;
             }
@@ -38,20 +39,20 @@ public class Main {
                     System.out.println("Vores åbningstider er");
                     System.out.println("Mandag-fredag 10-20");
                     System.out.println("lørdag-søndag 10-18");
-
                 case 2:
                     MedlemsRegistering.tilføjMedlem();
                 case 3:
-                    MedlemsRegistering.tilføjMedlem();
+                    MedlemsRegistering.visMedlemmer();
                 case 4:
-                    Leaderboard.visLeaderboard();
+                    Leaderboard.main();
                 case 5:
-                    Leaderboard.main(args);
 
                 case 6:
                     Restanse.restance();
                 case 7:
-                    SwimShop.main(null);
+                    SwimShop.startService();
+                case 8:
+                    SwimShop.startService2();
 
             }
         }
