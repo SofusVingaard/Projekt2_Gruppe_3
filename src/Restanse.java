@@ -13,7 +13,7 @@ public class Restanse {
             Scanner scanner = new Scanner(new File(FILNAVN));
             //læse alle linjer i vores fil
             List<String> linjer = Files.readAllLines(Path.of(FILNAVN));
-//nu skal jeg filtre alle de linjer som indeholder "Ikke betalt"
+            //nu skal jeg filtre alle de linjer som indeholder "Ikke betalt"
             List<String> restance = linjer.stream()
                     .filter(linje -> linje.contains("Ikke betalt"))
                     .collect(Collectors.toList());
@@ -27,9 +27,7 @@ public class Restanse {
                 System.out.println("Restance på følgende brugere ");
                 for (int i = 0; i < restance.size(); i++) {
                     System.out.println((i + 1) + ": " + restance.get(i));  // Vis linje nummer og indhold
-
                 }
-
             }
         }
     public static void main(String[] args) throws Exception {

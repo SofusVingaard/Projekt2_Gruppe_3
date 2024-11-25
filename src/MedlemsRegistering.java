@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class MedlemsRegistering {
     //Klasse bibliotek
     private static final String FILNAVN = "src/Medlemmer.txt";
+    private static final String KONTIGENT= "src/KontigentPriser.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
@@ -14,7 +15,7 @@ public class MedlemsRegistering {
     private static final String MEDLEMSID="Medlemsnummer: ";
 
 
-
+    // Metode til at tilføje medlemmer
     public static void tilføjMedlem() {
         Scanner sc = new Scanner(System.in);
         String svømmekategori;
@@ -22,7 +23,7 @@ public class MedlemsRegistering {
         double pris = 0;
 
         int medlemsId= findMaxMedlemsId()+1;
-
+        //Indtast medlemmets information
         System.out.println("Indtast Medlemmets navn:");
         String navn = sc.nextLine();
 
@@ -33,7 +34,7 @@ public class MedlemsRegistering {
             svømmekategori="Junior";
             // De her linjer bruges til at ændre vores kontigent pris i programmet fra et tekst dokument
             // så det er nemmere for svømmeklubben at ændre prisen uden at skulle ændre src kode
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                         // Søger efter en linje hvor Junior indgår
@@ -55,7 +56,7 @@ public class MedlemsRegistering {
         } else if (alder<=60) {
             svømmekategori="Senior";
                 // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Senior")) {
@@ -73,7 +74,7 @@ public class MedlemsRegistering {
         } else {
             svømmekategori="60+";
                 // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Senior")) {
@@ -98,7 +99,7 @@ public class MedlemsRegistering {
         } else {
             type=PASSIV;
             // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/KontigentPriser.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.startsWith("Passiv")) {
@@ -124,7 +125,7 @@ public class MedlemsRegistering {
         }
 
         String medlemData = MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
-
+            //BufferedWriter skriver medlemsData ind i tekst filen Medlemmer
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN, true))) {
             writer.write(medlemData);
             writer.newLine();
