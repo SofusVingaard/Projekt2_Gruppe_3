@@ -1,3 +1,4 @@
-sofus:crawl:1.0
-thomas:ryg:10.2, r:10.25, b:10.1, butterfly:13.25, crawl:12.45
-Sofus:Crawl:15.0
+Sofus: ryg:215.0
+Margit: bryst:210.0
+Thommy: bryst :230.0
+Sofus: bryst:230.0
