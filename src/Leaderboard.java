@@ -24,7 +24,7 @@ public class Leaderboard {
         discipliner.put(disciplin, tid);
         leaderboard.put(navn, discipliner);
         skrivLeaderboard(leaderboard);
-        System.out.println("Tid tilføjet for " + navn + " i disciplinen " + disciplin + ": " + tid);
+        System.out.println("Tid tilføjet for " + navn + " i disciplinen " + disciplin + ", Tid: " + tid);
     }
 
 

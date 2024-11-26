@@ -178,7 +178,7 @@ public class MedlemsRegistering {
                         speedo = keyboard.nextInt();
                         keyboard.nextLine();
 
-                        stævnePlacering = navn + " " + disciplin + " " + placering + " " + speedo;
+                        stævnePlacering = "Svømmer: "+navn+", Disciplin: "+ disciplin+", Placering: "+placering+", Tid  " + speedo;
                         try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                             writer.write(stævnePlacering);
                             writer.newLine();
