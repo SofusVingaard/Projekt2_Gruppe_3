@@ -1,3 +1,4 @@
+import java.awt.font.LineBreakMeasurer;
 import java.util.Scanner;
 
 public class Main {
@@ -39,20 +40,28 @@ public class Main {
                     System.out.println("Vores åbningstider er");
                     System.out.println("Mandag-fredag 10-20");
                     System.out.println("lørdag-søndag 10-18");
+                    break;
                 case 2:
                     MedlemsRegistering.tilføjMedlem();
+                    break;
                 case 3:
                     MedlemsRegistering.visMedlemmer();
+                    break;
                 case 4:
                     Leaderboard.main();
+                    break;
                 case 5:
-
+                    MedlemsRegistering.konkurrenceStævne();
+                    break;
                 case 6:
                     Restanse.restance();
+                    break;
                 case 7:
                     SwimShop.startService();
+                    break;
                 case 8:
                     SwimShop.startService2();
+                    break;
 
             }
         }
