@@ -3,10 +3,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
-
 public class Svømmehold {
 
-    private static final String FILNAVN = "srcMedlemmer.txt";
+    private static final String FILNAVN = "src/Medlemmer.txt";
     private static final String ALDER = "Alder: ";
 
     public static void main(String[] args) {
