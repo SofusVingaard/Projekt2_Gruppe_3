@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.awt.font.LineBreakMeasurer;
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ public class Main {
             System.out.println("2: Opret medlem:");
             System.out.println("3: Se medlemmer:");
             System.out.println("4: Gå til leaderboard:");
-            System.out.println("5: ");
+            System.out.println("5: Registrer svømmers tid til stævne");
             System.out.println("6: Se om medlemmer er i restanse");
             System.out.println("7: Køb dailyPass til svømmehallen");
             System.out.println("8: Køb vare  i SwipShop");
@@ -64,6 +66,12 @@ public class Main {
                     break;
 
             }
+
         }
+
     }
 }
+
+
+
+
