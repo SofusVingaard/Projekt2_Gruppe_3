@@ -27,6 +27,7 @@ public class Restanse {
                 System.out.println("Restance på følgende brugere ");
                 for (int i = 0; i < restance.size(); i++) {
                     System.out.println((i + 1) + ": " + restance.get(i));  // Vis linje nummer og indhold
+
                 }
             }
         }
