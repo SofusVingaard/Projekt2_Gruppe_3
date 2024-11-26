@@ -146,7 +146,7 @@ public class MedlemsRegistering {
         String navn;
         String disciplin;
         int placering;
-        double speedo;
+        String speedo = "";
         String stævnePlacering;
         String yapping;
         boolean keepSwimming = true;
@@ -166,38 +166,60 @@ public class MedlemsRegistering {
                 throw new RuntimeException(e);}
 
                 while (keepSwimming) {
-                    System.out.println("indtast navn svømmer");
+                    System.out.println("indtast svømmers navn");
                     navn = keyboard.nextLine();
                     System.out.println("Indtast disciplin. (" + RYG + "," + CRAWL + "," + BRYST + "," + BUTTERFLY);
                     disciplin = keyboard.nextLine();
                     if (disciplin.equalsIgnoreCase(RYG) || disciplin.equalsIgnoreCase(CRAWL) || disciplin.equalsIgnoreCase(BRYST) || disciplin.equalsIgnoreCase(BUTTERFLY)) {
-                        System.out.println("Indtast placering");
-                        placering = keyboard.nextInt();
-                        keyboard.nextLine();
-                        System.out.println("Hvor hurtigt svømmede personen?");
-                        speedo = keyboard.nextInt();
-                        keyboard.nextLine();
+                        System.out.println("Indtast placering");}
+                    else {
+                        System.out.println("Ugyldig disciplin");}
 
-                        stævnePlacering = "Svømmer: "+navn+", Disciplin: "+ disciplin+", Placering: "+placering+", Tid  " + speedo;
-                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
-                            writer.write(stævnePlacering);
-                            writer.newLine();
-                            System.out.println("Placeringen er blevet registreret til stævne " + stævne);
 
-                        } catch (IOException t) {
-                            throw new RuntimeException(t);
+                    placering = keyboard.nextInt();
+                        keyboard.nextLine();
+                        System.out.println("Hvor hurtigt svømmede personen? I format Minut.Sekund");
+                        boolean speedoTid = true;
+
+                        while (speedoTid) {
+                            speedo = keyboard.nextLine();
+                            speedo = speedo.replace(",", ".");
+                            if (speedo.matches("\\d+\\.\\d{1,2}")) {
+                                speedoTid = false; // Gyldigt format
+                            } else {
+                                System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund (f.eks. 2.30)");
+                            }
                         }
-                        System.out.println("Vil du registrere flere svømme? (Ja/Nej)");
-                        yapping = keyboard.nextLine();
-                        if (yapping.equalsIgnoreCase("Ja")) {
-                            continue;
-                        } else keepSwimming = false;
 
-                    } else System.out.println("Ugyldig disciplin");
+                            double tid;
+                            try {
+                                tid = Double.parseDouble(speedo);
+                            } catch (NumberFormatException p) {
+                                System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund");
+                            }
 
-                }
 
-            }
+                            stævnePlacering = "Svømmer: " + navn + ", Disciplin: " + disciplin + ", Placering: " + placering + ", Tid  " + speedo;
+                            try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
+                                writer.write(stævnePlacering);
+                                writer.newLine();
+                                System.out.println("Placeringen er blevet registreret til stævne " + stævne);
+
+                            } catch (IOException t) {
+                                throw new RuntimeException(t);
+                            }
+                            System.out.println("Vil du registrere flere svømme? (Ja/Nej)");
+                            yapping = keyboard.nextLine();
+                            if (yapping.equalsIgnoreCase("Ja")) {
+                                continue;
+                            } else keepSwimming = false;
+
+                        }
+
+                    }
+
+                
+
 
 
 
