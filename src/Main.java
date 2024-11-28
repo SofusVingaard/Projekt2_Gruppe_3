@@ -57,9 +57,7 @@ public class Main {
                     break;
                 case 7:
                     SwimShop.startService();
-                case 8:
-                    SwimShop.startService2();
-                    break;
+
 
             }
         }
