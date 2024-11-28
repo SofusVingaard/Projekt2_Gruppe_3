@@ -7,14 +7,14 @@ import java.util.Scanner;
 
 public class MedlemsRegistering {
     //Klasse bibliotek
-     static final String FILNAVN = "src/Medlemmer.txt";
+    static final String FILNAVN = "src/Medlemmer.txt";
     private static final String KONTIGENT= "src/KontigentPriser.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
     private static final String PASSIV="Medlemsskab: Passiv";
-     static final String MEDLEMSID="Medlemsnummer: ";
-     static final String KONKURRENCE="src/Konkurrence stævner";
+    static final String MEDLEMSID="Medlemsnummer: ";
+    static final String KONKURRENCE="src/Konkurrence stævner";
     private static final String BRYST= "Bryst";
     private static final String CRAWL="Crawl";
     private static final String BUTTERFLY= "Butterfly";
@@ -172,39 +172,49 @@ public class MedlemsRegistering {
                     System.out.println("indtast svømmers navn");
                     navn = keyboard.nextLine();
                     System.out.println("Indtast disciplin. (" + RYG + "," + CRAWL + "," + BRYST + "," + BUTTERFLY);
-                    disciplin = keyboard.nextLine();
                     // Vi tjekker om indputtet vi skriver er en valid disciplin
-                    if (disciplin.equalsIgnoreCase(RYG) || disciplin.equalsIgnoreCase(CRAWL) || disciplin.equalsIgnoreCase(BRYST) || disciplin.equalsIgnoreCase(BUTTERFLY)) {
-                        System.out.println("Indtast placering");
-
+                    while (true) {
+                        disciplin = keyboard.nextLine();
+                        if (disciplin.equalsIgnoreCase(RYG) || disciplin.equalsIgnoreCase(CRAWL) || disciplin.equalsIgnoreCase(BRYST) || disciplin.equalsIgnoreCase(BUTTERFLY)) {
+                            System.out.println("Indtast placering mellem 1 og 12");
+                            break;
+                        } else {
+                            System.out.println("Ugyldig disciplin");
+                            System.out.println("Venligst indtast: "+RYG+" "+CRAWL+" "+BRYST+" "+BUTTERFLY);
+                        }
                     }
-                    else {
-                        System.out.println("Ugyldig disciplin");}
-
-                    while (dicsiplinLoop) {
+                    while (true) {
                        try {
-                           placering = keyboard.nextInt();
-                           keyboard.nextLine();
-                           dicsiplinLoop=false;
-                       } catch (InputMismatchException t){
-                           System.out.println("Forkert input indtast et tal");
-                       }
+                           placering = Integer.parseInt(keyboard.nextLine());
+                          // keyboard.nextLine();
+                           if (placering>=1 && placering<=12){
 
+                               break;
+                           }
+                           else {
+                               System.out.println("Forkert input indtast et tal mellem 1 og 12");
+                           }
+                       }
+                            catch (InputMismatchException t){
+                           System.out.println("Forkert input det skal være et tal mellem 1 og 12");
+                       }
+                            catch (NumberFormatException p){
+                           System.out.println("Forkert input det skal være et tal mellem 1 og 12");
+                       }
                     }
                         System.out.println("Hvor hurtigt svømmede personen? I format Minut.Sekund");
-                        boolean speedoTid = true;
+
 
                         // while loop igen for at man kan indtaste en tid indtil man inputter en korrekt tid
-                        while (speedoTid) {
+                        while (true) {
                             speedo = keyboard.nextLine();
                             speedo = speedo.replace(",", ".");
                             if (speedo.matches("\\d+\\.\\d{1,2}")) {
-                                speedoTid = false; // Gyldigt format
+                                break;
                             } else {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund (f.eks. 2.30)");
                             }
                         }
-
                             double tid;
                             try {
                                 tid = Double.parseDouble(speedo);
