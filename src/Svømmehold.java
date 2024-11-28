@@ -99,5 +99,10 @@ public class Svømmehold {
                 break;
             }
         }
-    }
+        Scanner ID = new Scanner(System.in);
+        int MedlemsID = 0;
+        ID.nextInt(MedlemsID);
+        Træningstider.findMedlemNavn(MedlemsID);
+
+        }
 }
