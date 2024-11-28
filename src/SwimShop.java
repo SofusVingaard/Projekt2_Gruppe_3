@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-/*public class SwimShop {
+public class SwimShop {
     // Klassevariabel til at gemme dailyPass
     private static double dailyPass = 0;
 
@@ -78,5 +78,3 @@ import java.util.Scanner;
 
     }
 }
-
- */

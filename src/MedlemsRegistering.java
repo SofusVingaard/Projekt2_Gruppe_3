@@ -7,13 +7,13 @@ import java.util.Scanner;
 
 public class MedlemsRegistering {
     //Klasse bibliotek
-    private static final String FILNAVN = "src/Medlemmer.txt";
+     static final String FILNAVN = "src/Medlemmer.txt";
     private static final String KONTIGENT= "src/KontigentPriser.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
     private static final String PASSIV="Medlemsskab: Passiv";
-    private static final String MEDLEMSID="Medlemsnummer: ";
+     static final String MEDLEMSID="Medlemsnummer: ";
      static final String KONKURRENCE="src/Konkurrence stævner";
     private static final String BRYST= "Bryst";
     private static final String CRAWL="Crawl";
@@ -259,7 +259,6 @@ public class MedlemsRegistering {
         }
         return maxId;
     }
-
 
 
     public static void visMedlemmer() {

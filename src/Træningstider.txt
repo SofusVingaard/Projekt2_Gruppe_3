@@ -1,0 +1,4 @@
+MedlemsID: 4, Navn: Sofus, Dato: 20-08-2024, Disciplin: crawl, Træningstid: 2.50
+MedlemsID: 5, Navn: Christoffer, Dato: 20-12-2006, Disciplin: ryg, Træningstid: 10.00
+MedlemsID: 9, Navn: kian, Dato: 20-12-2024, Disciplin: ryg, Træningstid: 3.50
+MedlemsID: 9, Navn: kian, Dato: 21-12-2024, Disciplin: ryg, Træningstid: 3.40
