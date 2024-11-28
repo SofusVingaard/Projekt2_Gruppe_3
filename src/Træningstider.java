@@ -8,7 +8,7 @@ public class Træningstider {
     static final String TRÆNING_FIL = "src/Træningstider.txt";
 
 
-    private static String findMedlemNavn(int medlemsId) {
+    public static String findMedlemNavn(int medlemsId) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(MEDLEMMER_FIL));
             String line;
