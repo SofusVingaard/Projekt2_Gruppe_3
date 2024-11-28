@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 public class Restanse {
     private static final String FILNAVN = "src/Medlemmer.txt";
         public static void restance() throws Exception {
-            int valg;
+            int valg = 0;
 
-            Scanner scanner = new Scanner(new File(FILNAVN));
+            Scanner scanner = new Scanner(System.in);
             //læse alle linjer i vores fil
             List<String> linjer = Files.readAllLines(Path.of(FILNAVN));
             //nu skal jeg filtre alle de linjer som indeholder "Ikke betalt"
@@ -36,11 +36,12 @@ public class Restanse {
                     System.out.println("Indtast nummeret på medlemmet, du vil ændre:");
 
                        try {
-                           valg = scanner.nextInt();
-                           scanner.nextLine();  //håndtere bare linjeskift efter nextInt()
+                           valg = Integer.parseInt(scanner.nextLine());
                        }
                        catch (InputMismatchException p){
-
+                      }
+                       catch (NumberFormatException x){
+                           
                        }
 
 
@@ -48,7 +49,7 @@ public class Restanse {
                     // her kontroller man om valget er gyldigt
                     if (valg < 1 || valg > restance.size()) {
                         System.out.println("Ugyldigt valg. Afslutter programmet.");
-                        return;
+                        //return;
                     }
                     // Henter den valgte linje fra de medlemmer, der er i restance
                     String mangleBetaling = restance.get(valg - 1);

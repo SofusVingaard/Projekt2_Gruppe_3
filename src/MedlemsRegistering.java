@@ -151,7 +151,6 @@ public class MedlemsRegistering {
         String stævnePlacering;
         String yapping;
         boolean keepSwimming = true;
-        boolean dicsiplinLoop=true;
         try (BufferedReader reader = new BufferedReader(new FileReader(KONKURRENCE))) {
             System.out.println("Indtast navn på stævne");
             stævne = keyboard.nextLine();
@@ -168,6 +167,8 @@ public class MedlemsRegistering {
                 throw new RuntimeException(e);}
                 // vi starter et while loop for at vi kan registrere flere svømmere til stævnet
                 while (keepSwimming) {
+                    boolean dicsiplinLoop=true;
+
                     System.out.println("indtast svømmers navn");
                     navn = keyboard.nextLine();
                     System.out.println("Indtast disciplin. (" + RYG + "," + CRAWL + "," + BRYST + "," + BUTTERFLY);
