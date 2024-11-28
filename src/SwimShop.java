@@ -133,7 +133,8 @@ public class SwimShop {
         }
         System.out.println("Indtast Navn: "); //Da det skal være bruge venligt vil deres id være navn
         // vi kan senere hen gøre det til en mail, tele, eller login process, men for nu er det navn
-        String customerId = scanner.next();
+        Scanner scan = new Scanner(System.in);
+        String customerId = scan.nextLine();
 
         System.out.println("Indtast beløb: "); // det vil være i kontant
         double amountPaid = scanner.nextDouble();
