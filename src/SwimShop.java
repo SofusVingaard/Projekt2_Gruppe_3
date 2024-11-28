@@ -1,9 +1,11 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class SwimShop {
     // Klassevariabel til at gemme dailyPass
     private static double dailyPass = 0;
-    private static final String FILNAVN = "src/Medlemmer.txt";
     private static class revenue {
         final private String customerId; //Så kan man holde styr mellem flere kunder
         final private double amountPaid; //Hvor meget kunden betaler
@@ -16,6 +18,16 @@ public class SwimShop {
             this.change = 0.0; //bare en default værdi
 
 
+        }
+
+        public void betalingshistorik(){
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/betalingshistorik.txt", true))){
+                //gemmer enkelt betaling
+                writer.write(this.toString());
+                writer.newLine();
+            } catch (IOException e) {
+                System.out.println("Fejl ved skrivning: " + e.getMessage());
+            }
         }
         //Jeg vil nu lave change med en if og else statement
         // den skal kunne regne ud hvis en kunden betaler med en 500 så skal det tilbagebetales
@@ -77,12 +89,13 @@ public class SwimShop {
             case 4:
                 dailyPass = 1;
                 break;
+            case 5:
+                dailyPass = 0;
+                break;
             default:
                 System.out.println("Ugyldigt valg");
         }
 
-    }
-    public static void startService2() {
         System.out.println("Tilføj produkt til kurv");
         System.out.println("1. Badetøj til Mænd (300 kr.)");
         System.out.println("2. Badetøj til Kvinder (800 kr.)");
@@ -91,7 +104,6 @@ public class SwimShop {
         System.out.println("5. Håndklæde (5 kr.)");
         System.out.println("6. Tast 0 for ingen");
 
-        Scanner scanner = new Scanner(System.in);
         int addOn = scanner.nextInt();
         double productCost = 0;
 
@@ -117,10 +129,12 @@ public class SwimShop {
             default:
                 System.out.println("Ugyldigt valg");
                 return;
+
         }
         System.out.println("Indtast Navn: "); //Da det skal være bruge venligt vil deres id være navn
         // vi kan senere hen gøre det til en mail, tele, eller login process, men for nu er det navn
-        String customerId = scanner.next();
+        Scanner scan = new Scanner(System.in);
+        String customerId = scan.nextLine();
 
         System.out.println("Indtast beløb: "); // det vil være i kontant
         double amountPaid = scanner.nextDouble();
@@ -141,11 +155,14 @@ public class SwimShop {
             System.out.println("Beløbet er ikke tilstrækkeligt.");
         }
 
+        payment.betalingshistorik();
+
         scanner.close();
         }
 
     public static void main(String[] args) {
         SwimShop swimShop = new SwimShop();
+
         SwimShop.startService();
     }
     }
