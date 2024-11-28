@@ -51,6 +51,7 @@ public class Main {
                     Restanse.restance();
                 /*case 7:
                     SwimShop.startService();
+                    break;
                 case 8:
                     SwimShop.startService2();
 */
