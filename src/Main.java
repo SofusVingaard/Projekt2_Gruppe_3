@@ -39,21 +39,28 @@ public class Main {
                     System.out.println("Vores åbningstider er");
                     System.out.println("Mandag-fredag 10-20");
                     System.out.println("lørdag-søndag 10-18");
+                    break;
                 case 2:
                     MedlemsRegistering.tilføjMedlem();
+                    break;
                 case 3:
                     MedlemsRegistering.visMedlemmer();
+                    break;
                 case 4:
                     Leaderboard.main(args);
+                    break;
                 case 5:
                     Træningstider.opretTræningstid();
+                    break;
                 case 6:
                     Restanse.restance();
-                /*case 7:
+                    break;
+                case 7:
                     SwimShop.startService();
                 case 8:
                     SwimShop.startService2();
-*/
+                    break;
+
             }
         }
     }
