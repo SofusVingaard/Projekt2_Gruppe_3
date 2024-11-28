@@ -241,11 +241,6 @@ public class MedlemsRegistering {
 
                     }
 
-                
-
-
-
-
     private static int findMaxMedlemsId() {
         int maxId = 1;
         try (BufferedReader reader = new BufferedReader(new FileReader(FILNAVN))) {
