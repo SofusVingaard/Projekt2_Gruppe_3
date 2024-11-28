@@ -11,4 +11,3 @@ Medlemsnummer: 9 Navn: kian, Alder: 23, Medlemsskab: Aktiv, Aldersgruppe: Senior
 Medlemsnummer: 10 Navn: ropert, Alder: 33, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 11 Navn: gert, Alder: 50, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 12 Navn: bo, Alder: 39, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
-Medlemsnummer: 13 Navn: bo, Alder: 24, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
