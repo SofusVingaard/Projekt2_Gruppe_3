@@ -153,7 +153,14 @@ public class MedlemsRegistering {
         boolean keepSwimming = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(KONKURRENCE))) {
             System.out.println("Indtast navn på stævne");
-            stævne = keyboard.nextLine();
+            while (true) {
+                stævne = keyboard.nextLine();
+                if (stævne.isBlank()) {
+                    System.out.println("Ugyldigt input");
+                    System.out.println("Indtast navnet på stævnet");
+                }
+                else break;
+            }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                 // Indtaster stævnets navn og gemmer det
                 writer.newLine();
@@ -167,32 +174,38 @@ public class MedlemsRegistering {
                 throw new RuntimeException(e);}
                 // vi starter et while loop for at vi kan registrere flere svømmere til stævnet
                 while (keepSwimming) {
-                    boolean dicsiplinLoop=true;
-
                     System.out.println("indtast svømmers navn");
-                    navn = keyboard.nextLine();
+                    while (true) {
+                        navn = keyboard.nextLine();
+                        if (navn.isBlank() || !navn.matches("[a-zA-Z]+")){
+                            System.out.println("fejl");
+                            System.out.println("Indtast venligst et navn");
+                        }
+                        else {
+                            break;
+                        }
+                    }
                     System.out.println("Indtast disciplin. (" + RYG + "," + CRAWL + "," + BRYST + "," + BUTTERFLY);
                     // Vi tjekker om indputtet vi skriver er en valid disciplin
                     while (true) {
                         disciplin = keyboard.nextLine();
                         if (disciplin.equalsIgnoreCase(RYG) || disciplin.equalsIgnoreCase(CRAWL) || disciplin.equalsIgnoreCase(BRYST) || disciplin.equalsIgnoreCase(BUTTERFLY)) {
-                            System.out.println("Indtast placering mellem 1 og 12");
                             break;
                         } else {
                             System.out.println("Ugyldig disciplin");
                             System.out.println("Venligst indtast: "+RYG+" "+CRAWL+" "+BRYST+" "+BUTTERFLY);
                         }
                     }
+                    System.out.println("Indtast placering mellem 1 og 12");
                     while (true) {
                        try {
-                           placering = Integer.parseInt(keyboard.nextLine());
-                          // keyboard.nextLine();
-                           if (placering>=1 && placering<=12){
-
+                           placering = keyboard.nextInt();
+                           keyboard.nextLine();
+                           if (placering>=1){
                                break;
                            }
                            else {
-                               System.out.println("Forkert input indtast et tal mellem 1 og 12");
+                               System.out.println("Forkert input indtast et tal større end 1 ");
                            }
                        }
                             catch (InputMismatchException t){
@@ -215,9 +228,8 @@ public class MedlemsRegistering {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund (f.eks. 2.30)");
                             }
                         }
-                            double tid;
+
                             try {
-                                tid = Double.parseDouble(speedo);
                             } catch (NumberFormatException p) {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund");
                             }
