@@ -18,7 +18,8 @@ public class Main {
             System.out.println("5: Opret træningstid");
             System.out.println("6: Se om medlemmer er i restanse");
             System.out.println("7: Køb dailyPass til svømmehallen");
-            System.out.println("8: Køb vare  i SwipShop");
+            System.out.println("8: Køb vare i SwipShop");
+            System.out.println("9: Indtast et konkurrence stævne");
             System.out.println("0: Luk Programmet:");
             tast = keyboard.nextInt();
             //clear vores scanner buffer
@@ -57,8 +58,9 @@ public class Main {
                     break;
                 case 7:
                     SwimShop.startService();
-
-
+                case 9:
+                    MedlemsRegistering.konkurrenceStævne();
+                    break;
             }
         }
     }
