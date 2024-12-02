@@ -2,6 +2,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -182,7 +184,10 @@ public class MedlemsRegistering {
         String speedo = "";
         String stævnePlacering;
         String yapping;
-        String stævnedato;
+        LocalDate idag= LocalDate.now();
+        DateTimeFormatter pattern= DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
+        String formatdato=idag.format(pattern);
+
         boolean keepSwimming = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(KONKURRENCE))) {
             System.out.println("Indtast navn på stævne");
@@ -197,8 +202,15 @@ public class MedlemsRegistering {
             }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                 // Indtaster stævnets navn og gemmer det
+                String firstLetter= stævne.substring(0, 1);
+                firstLetter=firstLetter.toUpperCase();
+                String restOfWord=stævne.substring(1);
+                String stortBogstav= firstLetter+restOfWord;
+
                 writer.newLine();
-                writer.write(stævne);
+                writer.write(stortBogstav);
+                writer.newLine();
+                writer.write("Dato: "+formatdato.formatted(pattern));
                 writer.newLine();
                 }
                 catch (IOException e) {
@@ -283,8 +295,12 @@ public class MedlemsRegistering {
                             } catch (NumberFormatException p) {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund");
                             }
+                            String firstLetter= navn.substring(0, 1);
+                            firstLetter=firstLetter.toUpperCase();
+                            String restOfWord=navn.substring(1);
+                            String stortBogstav= firstLetter+restOfWord;
 
-                            stævnePlacering = "Svømmer: " + navn + ", Disciplin: " + disciplin + ", Placering: " + placering + ", Tid  " + speedo;
+                            stævnePlacering = "Svømmer: " + stortBogstav + ", Disciplin: " + disciplin + ", Placering: " + placering + ", Tid  " + speedo;
                             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                                 writer.write(stævnePlacering);
                                 writer.newLine();
@@ -298,9 +314,7 @@ public class MedlemsRegistering {
                             if (yapping.equalsIgnoreCase("Ja")) {
                                 continue;
                             } else keepSwimming = false;
-
                         }
-
                     }
 
     private static int findMaxMedlemsId() {
@@ -326,7 +340,6 @@ public class MedlemsRegistering {
         }
         return maxId;
     }
-
 
     public static void visMedlemmer() {
         try {
