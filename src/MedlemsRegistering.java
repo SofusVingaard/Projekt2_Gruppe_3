@@ -1,6 +1,9 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -27,107 +30,138 @@ public class MedlemsRegistering {
         String svømmekategori;
         String kontigent;
         double pris = 0;
+        int alder;
 
         int medlemsId= findMaxMedlemsId()+1;
         //Indtast medlemmets information
         System.out.println("Indtast Medlemmets navn:");
-        String navn = sc.nextLine();
-
-        System.out.println("Indtast Medlemmets  alder:");
-        int alder = sc.nextInt();
-        sc.nextLine();
-        if (alder<=17){
-            svømmekategori="Junior";
-            // De her linjer bruges til at ændre vores kontigent pris i programmet fra et tekst dokument
-            // så det er nemmere for svømmeklubben at ændre prisen uden at skulle ændre src kode
-            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
+        String navn;
+        while (true) {
+            navn = sc.nextLine();
+            if (navn.isBlank() || !navn.matches("[a-zA-Z ]+")){
+                System.out.println("Indtast venligst et navn");
+            }
+            else {
+                break;
+            }
+        }
+        System.out.println("Indtast Medlemmets alder:");
+        while (true) {
+            alder = sc.nextInt();
+            sc.nextLine();
+            if (alder <= 17 && alder >= 1) {
+                svømmekategori = "Junior";
+                // De her linjer bruges til at ændre vores kontigent pris i programmet fra et tekst dokument
+                // så det er nemmere for svømmeklubben at ændre prisen uden at skulle ændre src kode
+                try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
                         // Søger efter en linje hvor Junior indgår
-                    if (line.startsWith("Junior")) {
-                        // Extract medlemsID from the line
-                        // Hver bid skilles ved mellemrum
-                        String[] parts = line.split(" ");
-                        try {
-                            //Tager bid nummer 2 i linjen og gør "int pris" til den værdi
-                            int kontigentPris = Integer.parseInt(parts[1]);
-                            pris=kontigentPris;
-                        } catch (NumberFormatException e) {
+                        if (line.startsWith("Junior")) {
+                            // Extract medlemsID from the line
+                            // Hver bid skilles ved mellemrum
+                            String[] parts = line.split(" ");
+                            try {
+                                //Tager bid nummer 2 i linjen og gør "int pris" til den værdi
+                                int kontigentPris = Integer.parseInt(parts[1]);
+                                pris = kontigentPris;
+                            } catch (NumberFormatException e) {
+                            }
                         }
                     }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (alder<=60) {
-            svømmekategori="Senior";
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } break;
+            } else if (alder <= 60 && alder>=18) {
+                svømmekategori = "Senior";
                 // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (line.startsWith("Senior")) {
-                        String[] parts = line.split(" ");
-                        try {
-                            int kontigentPris = Integer.parseInt(parts[1]);
-                            pris=kontigentPris;
-                        } catch (NumberFormatException e) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.startsWith("Senior")) {
+                            String[] parts = line.split(" ");
+                            try {
+                                int kontigentPris = Integer.parseInt(parts[1]);
+                                pris = kontigentPris;
+                            } catch (NumberFormatException e) {
+                            }
                         }
                     }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            svømmekategori="60+";
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } break;
+            } else if(alder>=60) {
+                svømmekategori = "60+";
                 // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (line.startsWith("Senior")) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.startsWith("Senior")) {
 
-                        String[] parts = line.split(" ");
-                        try {
-                            int kontigentPris = Integer.parseInt(parts[1]);
-                            pris=kontigentPris*0.75;
-                        } catch (NumberFormatException e) {
+                            String[] parts = line.split(" ");
+                            try {
+                                int kontigentPris = Integer.parseInt(parts[1]);
+                                pris = kontigentPris * 0.75;
+                            }
+                            catch (NumberFormatException e) {
+                            }
                         }
                     }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                break;
+            }
+            else {
+                System.out.println("Indtast venligst en alder der er over 0 ");
             }
         }
 
         System.out.println("Indtast Medlemmets type (Aktiv/Passiv):");
-        String type = sc.nextLine();
-        if (type.equalsIgnoreCase("Aktiv")){
-            type=AKTIV;
-        } else {
-            type=PASSIV;
-            // læs kommentar fra junior
-            try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (line.startsWith("Passiv")) {
-                        String[] parts = line.split(" ");
-                        try {
-                            int kontigentPris = Integer.parseInt(parts[1]);
-                            pris=kontigentPris;
-                        } catch (NumberFormatException e) {
+        String type;
+        while (true) {
+            type = sc.nextLine();
+            if (type.equalsIgnoreCase("Aktiv")) {
+                type = AKTIV;
+                break;
+            } else if (type.equalsIgnoreCase("Passiv")) {
+                type = PASSIV;
+                // læs kommentar fra junior
+                try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.startsWith("Passiv")) {
+                            String[] parts = line.split(" ");
+                            try {
+                                int kontigentPris = Integer.parseInt(parts[1]);
+                                pris = kontigentPris;
+                            } catch (NumberFormatException e) {
+                            }
                         }
                     }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                break;
+            }
+            else {
+                System.out.println("Indtast passiv eller aktiv");
             }
         }
-
-        System.out.println("Årlig kontigent pris er: "+pris+" kr. Vil du med betale kontigent nu eller senere? Nu/Senere");
-        String betalt = sc.nextLine();
-        if (betalt.equalsIgnoreCase("Nu")){
-            kontigent="Betalt";
-        } else {
-            kontigent="Ikke betalt";
+        System.out.println("Årlig kontigent pris er: "+pris+" kr. Vil du betale kontigent nu eller senere? Nu/Senere");
+        String betalt;
+        while (true) {
+            betalt = sc.nextLine();
+            if (betalt.equalsIgnoreCase("Nu")) {
+                kontigent = "Betalt";
+                break;
+            } else if (betalt.equalsIgnoreCase("Senere")) {
+                kontigent = "Ikke betalt";
+                break;
+            }
+            else {
+                System.out.println("Indtast nu eller senere");
+            }
         }
 
         String medlemData = MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
@@ -150,6 +184,10 @@ public class MedlemsRegistering {
         String speedo = "";
         String stævnePlacering;
         String yapping;
+        LocalDate idag= LocalDate.now();
+        DateTimeFormatter pattern= DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
+        String formatdato=idag.format(pattern);
+
         boolean keepSwimming = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(KONKURRENCE))) {
             System.out.println("Indtast navn på stævne");
@@ -159,12 +197,20 @@ public class MedlemsRegistering {
                     System.out.println("Ugyldigt input");
                     System.out.println("Indtast navnet på stævnet");
                 }
-                else break;
+                else
+                    break;
             }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                 // Indtaster stævnets navn og gemmer det
+                String firstLetter= stævne.substring(0, 1);
+                firstLetter=firstLetter.toUpperCase();
+                String restOfWord=stævne.substring(1);
+                String stortBogstav= firstLetter+restOfWord;
+
                 writer.newLine();
-                writer.write(stævne);
+                writer.write(stortBogstav);
+                writer.newLine();
+                writer.write("Dato: "+formatdato.formatted(pattern));
                 writer.newLine();
                 }
                 catch (IOException e) {
@@ -177,7 +223,7 @@ public class MedlemsRegistering {
                     System.out.println("indtast svømmers navn");
                     while (true) {
                         navn = keyboard.nextLine();
-                        if (navn.isBlank() || !navn.matches("[a-zA-Z]+")){
+                        if (navn.isBlank() || !navn.matches("[a-zA-Z ]+")){
                             System.out.println("fejl");
                             System.out.println("Indtast venligst et navn");
                         }
@@ -196,7 +242,7 @@ public class MedlemsRegistering {
                             System.out.println("Venligst indtast: "+RYG+" "+CRAWL+" "+BRYST+" "+BUTTERFLY);
                         }
                     }
-                    System.out.println("Indtast placering mellem 1 og 12");
+                    System.out.println("Indtast placering");
                     while (true) {
                        try {
                            placering = keyboard.nextInt();
@@ -205,14 +251,14 @@ public class MedlemsRegistering {
                                break;
                            }
                            else {
-                               System.out.println("Forkert input indtast et tal større end 1 ");
+                               System.out.println("Forkert input indtast et tal større eller ligmed 1 ");
                            }
                        }
                             catch (InputMismatchException t){
-                           System.out.println("Forkert input det skal være et tal mellem 1 og 12");
+                           System.out.println("Forkert input placeringen skal være større eller ligmed 1");
                        }
                             catch (NumberFormatException p){
-                           System.out.println("Forkert input det skal være et tal mellem 1 og 12");
+                           System.out.println("Forkert input placeringen skal være større eller ligmed 1");
                        }
                     }
                         System.out.println("Hvor hurtigt svømmede personen? I format Minut.Sekund");
@@ -223,18 +269,38 @@ public class MedlemsRegistering {
                             speedo = keyboard.nextLine();
                             speedo = speedo.replace(",", ".");
                             if (speedo.matches("\\d+\\.\\d{1,2}")) {
-                                break;
+                                String[] timeParts= speedo.split("\\.");
+                                int minutter = Integer.parseInt(timeParts[0]);
+                                int sekunder;
+                            try {
+                                sekunder=Integer.parseInt(timeParts[1]);
+                                // Tjekker if sekunder er 60 eller over
+                                if (sekunder>= 60){
+                                    System.out.println("Sekunder skal være 60 eller mindre, indtast tiden igen.");
+                                } else{
+                                    String formatteredeSekudner= String.format("%02d", sekunder);
+                                    speedo=minutter+"."+formatteredeSekudner;
+                                    break;
+                                }
+                            }
+                            catch (NumberFormatException e){
+                                System.out.println("Ugyldigt input. Indtast tid i Minut.Sekunder. (f.eks 2.30");
+                            }
+
                             } else {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund (f.eks. 2.30)");
                             }
                         }
-
                             try {
                             } catch (NumberFormatException p) {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund");
                             }
+                            String firstLetter= navn.substring(0, 1);
+                            firstLetter=firstLetter.toUpperCase();
+                            String restOfWord=navn.substring(1);
+                            String stortBogstav= firstLetter+restOfWord;
 
-                            stævnePlacering = "Svømmer: " + navn + ", Disciplin: " + disciplin + ", Placering: " + placering + ", Tid  " + speedo;
+                            stævnePlacering = "Svømmer: " + stortBogstav + ", Disciplin: " + disciplin + ", Placering: " + placering + ", Tid  " + speedo;
                             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                                 writer.write(stævnePlacering);
                                 writer.newLine();
@@ -243,14 +309,12 @@ public class MedlemsRegistering {
                             } catch (IOException t) {
                                 throw new RuntimeException(t);
                             }
-                            System.out.println("Vil du registrere flere svømme? (Ja/Nej)");
+                            System.out.println("Vil du registrere flere svømmere? (Ja/Nej)");
                             yapping = keyboard.nextLine();
                             if (yapping.equalsIgnoreCase("Ja")) {
                                 continue;
                             } else keepSwimming = false;
-
                         }
-
                     }
 
     private static int findMaxMedlemsId() {
@@ -277,7 +341,6 @@ public class MedlemsRegistering {
         return maxId;
     }
 
-
     public static void visMedlemmer() {
         try {
             List<String> linjer = Files.readAllLines(Paths.get(FILNAVN));
@@ -295,7 +358,7 @@ public class MedlemsRegistering {
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        konkurrenceStævne();
+        tilføjMedlem();
 
         while (true) {
             System.out.println("Vælg en mulighed:");

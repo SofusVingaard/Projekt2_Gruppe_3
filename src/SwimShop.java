@@ -136,6 +136,8 @@ public class SwimShop {
         Scanner scan = new Scanner(System.in);
         String customerId = scan.nextLine();
 
+        System.out.println("Beløb: " + (productCost+dailyPass) + " kr.");
+
         System.out.println("Indtast beløb: "); // det vil være i kontant
         double amountPaid = scanner.nextDouble();
 
@@ -150,7 +152,7 @@ public class SwimShop {
         System.out.println(payment);
 
         if (amountPaid >= (dailyPass+productCost)) {
-            System.out.println("Tak for betalingen! Tilbagebetaling: " + payment.getChange() + " kr.");
+            System.out.println("Tak for betalingen "+ customerId +"!" + " Tilbagebetaling: " + payment.getChange() + " kr.");
         } else {
             System.out.println("Beløbet er ikke tilstrækkeligt.");
         }
