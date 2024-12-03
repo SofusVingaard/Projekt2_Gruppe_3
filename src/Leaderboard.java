@@ -127,7 +127,6 @@ public class Leaderboard {
         }
     }
 
-
     // Vis de 5 bedste træningstider
     private static void visTop5(List<Træning> træninger, String gruppe) {
         Map<String, List<Træning>> discipliner = new TreeMap<>();  // Jeg har brugt TreeMap da den holder ordning
