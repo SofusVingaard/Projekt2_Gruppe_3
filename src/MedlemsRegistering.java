@@ -38,7 +38,7 @@ public class MedlemsRegistering {
         String navn;
         while (true) {
             navn = sc.nextLine();
-            if (navn.isBlank() || !navn.matches("[a-zA-Z -]+")){
+            if (navn.isBlank() || !navn.matches("[a-zA-Z -]+") || navn.equals("-") || navn.split("-").length>2){
                 System.out.println("Ugyldigt navn");
                 System.out.println("Indtast venligst et navn");
             }
@@ -138,7 +138,7 @@ public class MedlemsRegistering {
         }
 
         System.out.println("Indtast Medlemmets type (Aktiv)/Passiv):");
-        System.out.println("Et aktivt medlemskab koster 1600 for senior og 1000kr for junior ");
+        System.out.println("Et aktivt medlemskab koster 1600 for senior, 1000kr for junior og 1200 for 60+.");
         System.out.println("Et passivt medlemskab koster 500kr");
         String type;
         while (true) {
@@ -224,6 +224,7 @@ public class MedlemsRegistering {
             }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                 // Indtaster stævnets navn og gemmer det
+                //Bruges til at lave første bogstav i et navn stort
                 String firstLetter= stævne.substring(0, 1);
                 firstLetter=firstLetter.toUpperCase();
                 String restOfWord=stævne.substring(1);
@@ -245,7 +246,7 @@ public class MedlemsRegistering {
                     System.out.println("indtast svømmers navn");
                     while (true) {
                         navn = keyboard.nextLine();
-                        if (navn.isBlank() || !navn.matches("[a-zA-Z -]+")){
+                        if (navn.isBlank() || !navn.matches("[a-zA-Z -]+") || navn.equals("-") || navn.split("-").length>2){
                             System.out.println("fejl");
                             System.out.println("Indtast venligst et navn");
                         }
@@ -292,6 +293,8 @@ public class MedlemsRegistering {
                         while (true) {
                             speedo = keyboard.nextLine();
                             speedo = speedo.replace(",", ".");
+                            //Bruges til at formatere vores tidsinterval så den retter 1.5
+                            //til 1.05 i stedet
                             if (speedo.matches("\\d+\\.\\d{1,2}")) {
                                 String[] timeParts= speedo.split("\\.");
                                 int minutter = Integer.parseInt(timeParts[0]);
@@ -319,6 +322,7 @@ public class MedlemsRegistering {
                             } catch (NumberFormatException p) {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund");
                             }
+                            //Bruges til at lave første bogstav i et navn stort
                             String firstLetter= navn.substring(0, 1);
                             firstLetter=firstLetter.toUpperCase();
                             String restOfWord=navn.substring(1);
