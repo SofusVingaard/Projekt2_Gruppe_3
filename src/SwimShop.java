@@ -21,7 +21,7 @@ public class SwimShop {
         }
 
         public void betalingshistorik(){
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/betalingshistorik.txt", true))){
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/TekstFiler/betaling.txt", true))){
                 //gemmer enkelt betaling
                 writer.write(this.toString());
                 writer.newLine();

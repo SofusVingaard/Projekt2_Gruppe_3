@@ -1,3 +1,9 @@
+Kontigentpriser:
+Junior: 1000
+Senior: 1600
+Passiv: 500
+
+Betalingshistorik
 Customer ID: Mj, Amount Paid: 400.0, Change: 325.0
 Customer ID: , Amount Paid: 50.0, Change: 44.0
 Customer ID: Dana, Amount Paid: 50.0, Change: 0.0

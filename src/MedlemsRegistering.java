@@ -10,14 +10,14 @@ import java.util.Scanner;
 
 public class MedlemsRegistering {
     //Klasse bibliotek
-    static final String FILNAVN = "src/Medlemmer.txt";
-    private static final String KONTIGENT= "src/KontigentPriser.txt";
+    static final String FILNAVN = "src/TekstFiler/Medlemmer.txt";
+    private static final String KONTIGENT= "src/TekstFiler/betaling.txt";
     private static final String NAVN= "Navn: ";
     private static final String ALDER="Alder: ";
     private static final String AKTIV="Medlemsskab: Aktiv";
     private static final String PASSIV="Medlemsskab: Passiv";
     static final String MEDLEMSID="Medlemsnummer: ";
-    static final String KONKURRENCE="src/Konkurrence stævner";
+    static final String KONKURRENCE="src/TekstFiler/Konkurrence stævner";
     private static final String BRYST= "Bryst";
     private static final String CRAWL="Crawl";
     private static final String BUTTERFLY= "Butterfly";
