@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.file.*;
 import java.text.*;
 import java.util.*;
 
@@ -73,6 +72,15 @@ public class Træningstider {
 
         System.out.println("Indtast disciplin (f.eks. Crawl, Ryg, Bryst, Butterfly):");
         String disciplin = sc.nextLine();
+        while (true) {
+            disciplin = sc.nextLine();
+            if (disciplin.equalsIgnoreCase("RYG") || disciplin.equalsIgnoreCase("CRAWL") || disciplin.equalsIgnoreCase("BRYST") || disciplin.equalsIgnoreCase("BUTTERFLY")) {
+                break;
+            } else {
+                System.out.println("Ugyldig disciplin");
+                System.out.println("Venligst indtast: "+"Ryg,"+" "+"Crawl,"+" "+"Bryst"+" "+"Butterfly");
+            }
+        }
 
         // formateringen på tiden
         System.out.println("Indtast træningstid (minut.sekund):");
