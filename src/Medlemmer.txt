@@ -12,5 +12,6 @@ Medlemsnummer: 10 Navn: ropert, Alder: 33, Medlemsskab: Aktiv, Aldersgruppe: Sen
 Medlemsnummer: 11 Navn: gert, Alder: 50, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 12 Navn: bo, Alder: 39, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 13 Navn: Sexyy Redd, Alder: 36, Medlemsskab: Passiv, Aldersgruppe: Senior, Betalt
+Medlemsnummer: 14 Navn: christoffer, Alder: 99999, Medlemsskab: Passiv, Aldersgruppe: 60+, Betalt
 Medlemsnummer: 14 Navn: carl, Alder: 16, Medlemsskab: Aktiv, Aldersgruppe: Junior, Betalt
 Medlemsnummer: 15 Navn: bo, Alder: 17, Medlemsskab: Aktiv, Aldersgruppe: Junior, Betalt
