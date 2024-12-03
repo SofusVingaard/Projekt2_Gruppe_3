@@ -3,8 +3,8 @@ import java.text.*;
 import java.util.*;
 
 public class Træningstider {
-    static final String MEDLEMMER_FIL = "src/Medlemmer.txt";
-    static final String TRÆNING_FIL = "src/Træningstider.txt";
+    static final String MEDLEMMER_FIL = "src/TekstFiler/Medlemmer.txt";
+    static final String TRÆNING_FIL = "src/TekstFiler/Træningstider.txt";
 
 
     public static String findMedlemNavn(int medlemsId) {

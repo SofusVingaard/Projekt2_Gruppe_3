@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 
 public class Restanse {
-    private static final String FILNAVN = "src/Medlemmer.txt";
+    private static final String FILNAVN = "src/TekstFiler/Medlemmer.txt";
         public static void restance() throws Exception {
             int valg = 0;
 

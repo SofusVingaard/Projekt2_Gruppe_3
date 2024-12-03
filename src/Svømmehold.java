@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Svømmehold {
-    private static final String FILNAVN = "srcMedlem,mer.txt";
+    private static final String FILNAVN = "src/TekstFiler/Medlemmer.txt";
     private static final String ALDER = "Alder: ";
 
     public static void main(String[] args) {

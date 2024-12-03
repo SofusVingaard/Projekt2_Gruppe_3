@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Leaderboard {
 
-    private static final String TRÆNING_FIL = "src/Træningstider.txt";
+    private static final String TRÆNING_FIL = "src/TekstFiler/Træningstider.txt";
     private static List<Træning> træninger = new ArrayList<>();
 
 
@@ -77,7 +77,7 @@ public class Leaderboard {
 
     // Find medlemmers alder
     private static int findAlderByMedlemsId(int medlemsId) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/Medlemmer.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/TekstFiler/Medlemmer.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 // Tjekker for medlemsid/medlemsnummer
