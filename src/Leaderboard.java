@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Leaderboard {
 
-    private static final String TRÆNING_FIL = "src/TekstFiler/Leaderboard.Træningstider.txt";
+    private static final String TRÆNING_FIL = "src/TekstFiler/Træningstider.txt";
     private static List<Træning> træninger = new ArrayList<>();
 
 
