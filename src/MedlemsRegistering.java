@@ -137,7 +137,9 @@ public class MedlemsRegistering {
             }
         }
 
-        System.out.println("Indtast Medlemmets type (Aktiv/Passiv):");
+        System.out.println("Indtast Medlemmets type (Aktiv)/Passiv):");
+        System.out.println("Et aktivt medlemskab koster 1600 for senior og 1000kr for junior ");
+        System.out.println("Et passivt medlemskab koster 500kr");
         String type;
         while (true) {
             type = sc.nextLine();
