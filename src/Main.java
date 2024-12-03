@@ -53,7 +53,7 @@ public class Main {
                         Leaderboard.main(args);
                         break;
                     case 5:
-                        Træningstider.opretTræningstid();
+                        Leaderboard.Træningstider.opretTræningstid();
                         break;
                     case 6:
                         Restanse.restance();
