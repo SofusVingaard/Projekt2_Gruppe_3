@@ -3,3 +3,8 @@ Customer ID: , Amount Paid: 50.0, Change: 44.0
 Customer ID: Dana, Amount Paid: 50.0, Change: 0.0
 Customer ID: Dana White, Amount Paid: 500.0, Change: 494.0
 Customer ID: LadyBoy, Amount Paid: 55.0, Change: 0.0
+Customer ID: HVemKANEMIRKAN, Amount Paid: 301.0, Change: 0.0
+Customer ID: Jon "Bones" Jones, Amount Paid: 1000.0, Change: 130.0
+Customer ID: IceKiid, Amount Paid: 80.0, Change: 5.0
+Customer ID: Bjørn, Amount Paid: 10000.0, Change: 9550.0
+Customer ID: Thomas, Amount Paid: 850.0, Change: 0.0
