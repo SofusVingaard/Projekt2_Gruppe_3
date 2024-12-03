@@ -224,7 +224,7 @@ public class MedlemsRegistering {
                     System.out.println("indtast svømmers navn");
                     while (true) {
                         navn = keyboard.nextLine();
-                        if (navn.isBlank() || !navn.matches("[a-zA-Z ]+")){
+                        if (navn.isBlank() || !navn.matches("[a-zA-Z -]+")){
                             System.out.println("fejl");
                             System.out.println("Indtast venligst et navn");
                         }
