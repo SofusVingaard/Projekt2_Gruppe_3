@@ -39,6 +39,7 @@ public class MedlemsRegistering {
         while (true) {
             navn = sc.nextLine();
             if (navn.isBlank() || !navn.matches("[a-zA-Z ]+")){
+                System.out.println("Ugyldigt navn");
                 System.out.println("Indtast venligst et navn");
             }
             else {
