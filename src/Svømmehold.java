@@ -102,7 +102,7 @@ public class Svømmehold {
         Scanner ID = new Scanner(System.in);
         int MedlemsID = 0;
         ID.nextInt(MedlemsID);
-        Træningstider.findMedlemNavn(MedlemsID);
+        Leaderboard.Træningstider.findMedlemNavn(MedlemsID);
 
         }
 }
