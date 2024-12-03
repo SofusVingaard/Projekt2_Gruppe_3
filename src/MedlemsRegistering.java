@@ -48,73 +48,92 @@ public class MedlemsRegistering {
         }
         System.out.println("Indtast Medlemmets alder:");
         while (true) {
-            alder = sc.nextInt();
+            try { alder = sc.nextInt();
             sc.nextLine();
-            if (alder <= 17 && alder >= 1) {
-                svømmekategori = "Junior";
-                // De her linjer bruges til at ændre vores kontigent pris i programmet fra et tekst dokument
-                // så det er nemmere for svømmeklubben at ændre prisen uden at skulle ændre src kode
-                try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        // Søger efter en linje hvor Junior indgår
-                        if (line.startsWith("Junior")) {
-                            // Extract medlemsID from the line
-                            // Hver bid skilles ved mellemrum
-                            String[] parts = line.split(" ");
-                            try {
-                                //Tager bid nummer 2 i linjen og gør "int pris" til den værdi
-                                int kontigentPris = Integer.parseInt(parts[1]);
-                                pris = kontigentPris;
-                            } catch (NumberFormatException e) {
-                            }
-                        }
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } break;
-            } else if (alder <= 60 && alder>=18) {
-                svømmekategori = "Senior";
-                // læs kommentar fra junior
-                try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        if (line.startsWith("Senior")) {
-                            String[] parts = line.split(" ");
-                            try {
-                                int kontigentPris = Integer.parseInt(parts[1]);
-                                pris = kontigentPris;
-                            } catch (NumberFormatException e) {
-                            }
-                        }
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } break;
-            } else if(alder>=60) {
-                svømmekategori = "60+";
-                // læs kommentar fra junior
-                try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        if (line.startsWith("Senior")) {
 
-                            String[] parts = line.split(" ");
-                            try {
-                                int kontigentPris = Integer.parseInt(parts[1]);
-                                pris = kontigentPris * 0.75;
-                            }
-                            catch (NumberFormatException e) {
+                if (alder <= 17 && alder >= 1) {
+                    svømmekategori = "Junior";
+                    // De her linjer bruges til at ændre vores kontigent pris i programmet fra et tekst dokument
+                    // så det er nemmere for svømmeklubben at ændre prisen uden at skulle ændre src kode
+                    try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            // Søger efter en linje hvor Junior indgår
+                            if (line.startsWith("Junior")) {
+                                // Extract medlemsID from the line
+                                // Hver bid skilles ved mellemrum
+                                String[] parts = line.split(" ");
+                                try {
+                                    //Tager bid nummer 2 i linjen og gør "int pris" til den værdi
+                                    int kontigentPris = Integer.parseInt(parts[1]);
+                                    pris = kontigentPris;
+                                } catch (NumberFormatException e) {
+                                }
                             }
                         }
+                    } catch (IOException e) {
+                        System.out.println("Ugyldigt input");
+                        System.out.println("Skriv din alder");
+                        throw new RuntimeException(e);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Ugyldigt input");
+                        System.out.println("Skrive din alder");
                     }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+
+                    break;
+                } else if (alder <= 60 && alder >= 18) {
+                    svømmekategori = "Senior";
+                    // læs kommentar fra junior
+                    try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            if (line.startsWith("Senior")) {
+                                String[] parts = line.split(" ");
+                                try {
+                                    int kontigentPris = Integer.parseInt(parts[1]);
+                                    pris = kontigentPris;
+                                } catch (NumberFormatException e) {
+                                }
+                            }
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Ugyldigt input");
+                        System.out.println("Skrive din alder");
+                    }
+                    break;
+                } else if (alder >= 60) {
+                    svømmekategori = "60+";
+                    // læs kommentar fra junior
+                    try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            if (line.startsWith("Senior")) {
+
+                                String[] parts = line.split(" ");
+                                try {
+                                    int kontigentPris = Integer.parseInt(parts[1]);
+                                    pris = kontigentPris * 0.75;
+                                } catch (NumberFormatException e) {
+                                }
+                            }
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Ugyldigt input");
+                        System.out.println("Skrive din alder");
+                    }
+                    break;
+                } else {
+                    System.out.println("Indtast venligst en alder der er over 0 ");
                 }
-                break;
             }
-            else {
-                System.out.println("Indtast venligst en alder der er over 0 ");
+            catch (InputMismatchException e){
+                System.out.println("Ugyldigt input");
+                System.out.println("Indtast din alder");
+                sc.nextLine();
             }
         }
 
@@ -224,7 +243,7 @@ public class MedlemsRegistering {
                     System.out.println("indtast svømmers navn");
                     while (true) {
                         navn = keyboard.nextLine();
-                        if (navn.isBlank() || !navn.matches("[a-zA-Z ]+")){
+                        if (navn.isBlank() || !navn.matches("[a-zA-Z -]+")){
                             System.out.println("fejl");
                             System.out.println("Indtast venligst et navn");
                         }
@@ -256,10 +275,12 @@ public class MedlemsRegistering {
                            }
                        }
                             catch (InputMismatchException t){
-                           System.out.println("Forkert input placeringen skal være større eller ligmed 1");
+                           System.out.println("Forkert input placeringen skal være et tal der er større eller ligmed 1");
+                           keyboard.nextLine();
                        }
                             catch (NumberFormatException p){
-                           System.out.println("Forkert input placeringen skal være større eller ligmed 1");
+                           System.out.println("Forkert input placeringen skal være et tal der erstørre eller ligmed 1");
+                           keyboard.nextLine();
                        }
                     }
                         System.out.println("Hvor hurtigt svømmede personen? I format Minut.Sekund");
@@ -279,8 +300,8 @@ public class MedlemsRegistering {
                                 if (sekunder>= 60){
                                     System.out.println("Sekunder skal være 60 eller mindre, indtast tiden igen.");
                                 } else{
-                                    String formatteredeSekudner= String.format("%02d", sekunder);
-                                    speedo=minutter+"."+formatteredeSekudner;
+                                    String formatteredeSekunder= String.format("%02d", sekunder);
+                                    speedo=minutter+"."+formatteredeSekunder;
                                     break;
                                 }
                             }
