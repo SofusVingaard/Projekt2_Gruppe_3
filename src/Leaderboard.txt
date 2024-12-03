@@ -1,4 +1,0 @@
-Sofus: ryg:215.0
-Margit: bryst:210.0
-Thommy: bryst :230.0
-Sofus: bryst:230.0

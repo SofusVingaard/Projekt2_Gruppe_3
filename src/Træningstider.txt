@@ -2,3 +2,6 @@ MedlemsID: 4, Navn: Sofus, Dato: 20-08-2024, Disciplin: crawl, Træningstid: 2.5
 MedlemsID: 5, Navn: Christoffer, Dato: 20-12-2006, Disciplin: ryg, Træningstid: 10.00
 MedlemsID: 9, Navn: kian, Dato: 20-12-2024, Disciplin: ryg, Træningstid: 3.50
 MedlemsID: 9, Navn: kian, Dato: 21-12-2024, Disciplin: ryg, Træningstid: 3.40
+MedlemsID: 14, Navn: carl, Dato: 20-08-2024, Disciplin: crawl, Træningstid: 5.30
+MedlemsID: 15, Navn: bo, Dato: 20-08-2024, Disciplin: bryst, Træningstid: 4.30
+MedlemsID: 13, Navn: Sexyy Redd, Dato: 13-09-2024, Disciplin: butterfly, Træningstid: 2.50
