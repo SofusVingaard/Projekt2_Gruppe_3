@@ -138,9 +138,9 @@ public class SwimShop {
 
         System.out.println("Beløb: " + (productCost+dailyPass) + " kr.");
 
-        System.out.println("Indtast beløb: "); // det vil være i kontant
+        System.out.println("Indtast beløb som bliver betalt nu: "); // det vil være i kontant
         double amountPaid = scanner.nextDouble();
-
+        scanner.close();
         //tid til et payment objekt
         revenue payment = new revenue(customerId, amountPaid);
 
