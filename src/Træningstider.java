@@ -74,7 +74,7 @@ public class Træningstider {
         System.out.println("Indtast disciplin (f.eks. Crawl, Ryg, Bryst, Butterfly):");
         String disciplin = sc.nextLine();
 
-        // formatet på tiden
+        // formateringen på tiden
         System.out.println("Indtast træningstid (minut.sekund):");
         String træningstidInput = sc.nextLine();
 
