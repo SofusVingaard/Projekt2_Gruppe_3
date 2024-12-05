@@ -419,6 +419,8 @@ public class MedlemsRegistering {
         } catch (IOException e) {
             System.out.println("Fejl ved læsning af fil: " + e.getMessage());
         }
+
+
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
