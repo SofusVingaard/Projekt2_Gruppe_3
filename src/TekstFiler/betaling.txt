@@ -16,3 +16,5 @@ Customer ID: Bjørn, Amount Paid: 10000.0, Change: 9550.0
 Customer ID: Thomas, Amount Paid: 850.0, Change: 0.0
 Customer ID: 123, Amount Paid: 20.0, Change: 15.0
 Customer ID: christoffer, Amount Paid: 55.0, Change: 0.0
+Customer ID: mj, Amount Paid: 370.0, Change: 0.0
+Customer ID: WORLDSTAR, Amount Paid: 2000.0, Change: 100.0

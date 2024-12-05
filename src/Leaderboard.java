@@ -108,7 +108,7 @@ public class Leaderboard {
 
         // Inddel træninger i aldersgrupper
         for (Træning træning : træninger) {
-            if (træning.getAlder() < 17) {
+            if (træning.getAlder() <=17) {
                 under17.add(træning);
             } else {
                 over18.add(træning);
@@ -178,7 +178,7 @@ public class Leaderboard {
 
     public static class Træningstider {
         static final String MEDLEMMER_FIL = "src/TekstFiler/Medlemmer.txt";
-        static final String TRÆNING_FIL = "src/TekstFiler/Leaderboard.Træningstider.txt";
+        static final String TRÆNING_FIL = "src/TekstFiler/Træningstider.txt";
 
 
         public static String findMedlemNavn(int medlemsId) {
@@ -225,6 +225,7 @@ public class Leaderboard {
 
             // Hent medlem ved medlemsID
             String medlemNavn = findMedlemNavn(medlemsId);
+            int alder = findAlderByMedlemsId(medlemsId);
             if (medlemNavn == null) {
                 System.out.println("MedlemsID ikke fundet.");
                 return;
@@ -252,7 +253,7 @@ public class Leaderboard {
                     break;
                 } else {
                     System.out.println("Ugyldig disciplin");
-                    System.out.println("Venligst indtast: "+"Ryg,"+" "+"Crawl,"+" "+"Bryst"+" "+"Butterfly");
+                    System.out.println("Venligst indtast: " + "Ryg," + " " + "Crawl," + " " + "Bryst" + " " + "Butterfly");
                 }
             }
 
@@ -273,8 +274,8 @@ public class Leaderboard {
                 return;
             }
 
-            // Gemmer træningstider til filen
-            String træningData = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Dato: " + dato + ", Disciplin: " + disciplin + ", Træningstid: " + træningstidInput;
+            String træningData = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Alder: " + alder +
+                    ", Dato: " + dato + ", Disciplin: " + disciplin + ", Træningstid: " + træningstidInput;
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(TRÆNING_FIL, true))) {
                 writer.write(træningData);
                 writer.newLine();
@@ -284,7 +285,7 @@ public class Leaderboard {
             }
         }
 
-        public static void main(String[] args) {
+            public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
 
             while (true) {
