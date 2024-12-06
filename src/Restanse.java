@@ -1,80 +1,90 @@
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-
 public class Restanse {
     private static final String FILNAVN = "src/TekstFiler/Medlemmer.txt";
-        public static void restance() throws Exception {
-            int valg = 0;
 
-            Scanner scanner = new Scanner(System.in);
-            //læse alle linjer i vores fil
-            List<String> linjer = Files.readAllLines(Path.of(FILNAVN));
-            //nu skal jeg filtre alle de linjer som indeholder "Ikke betalt"
-            List<String> restance = linjer.stream()
-                    .filter(linje -> linje.contains("Ikke betalt"))
-                    .collect(Collectors.toList());
-            // Hvis der ikke er nogen "Ikke betalt"
-            //(Jeg prøvede at bruge null for at se om listen var tom for ikke betalt, men da collect(Collectors.toList()) altid returnere en liste ville den ikke compile)
-            //Så i stedet for null bruger jeg isEmpty for at tjekke om der nogen i restance
-            if (restance.isEmpty()) {
-                System.out.println("Fuld indtjening");
-            } else {
-                // Vis de ledige tider på den ønskede dato
-                System.out.println("Restance på følgende brugere ");
-                for (int i = 0; i < restance.size(); i++) {
-                    System.out.println((i + 1) + ": " + restance.get(i));  // linje nummer og indhold
-                        //vælg et medlem at ændre
+    public static void restance() throws IOException {
+        Scanner scanner = new Scanner(System.in);
 
-                    System.out.println("Indtast nummeret på medlemmet, du vil ændre:");
+        // Læs alle linjer i filen
+        List<String> linjer = Files.readAllLines(Path.of(FILNAVN));
 
-                       try {
-                           valg = Integer.parseInt(scanner.nextLine());
-                       }
-                       catch (InputMismatchException p){
-                      }
-                       catch (NumberFormatException x){
-                           
-                       }
+        // Filtrér linjer med "Ikke betalt"
+        List<String> restance = linjer.stream()
+                .filter(linje -> linje.contains("Ikke betalt"))
+                .collect(Collectors.toList());
 
+        // Hvis der ikke er nogen medlemmer i restance
+        if (restance.isEmpty()) {
+            System.out.println("Alle medlemmer har betalt deres kontingent.");
+            return;
+        }
 
+        // Vis medlemmer i restance
+        System.out.println("Medlemmer i restance:");
+        for (int i = 0; i < restance.size(); i++) {
+            System.out.println((i + 1) + ": " + restance.get(i));
+        }
 
-                    // her kontroller man om valget er gyldigt
-                    if (valg < 1 || valg > restance.size()) {
-                        System.out.println("Ugyldigt valg. Afslutter programmet.");
-                        //return;
-                    }
-                    // Henter den valgte linje fra de medlemmer, der er i restance
-                    String mangleBetaling = restance.get(valg - 1);
+        while (true) {
+            // Bed brugeren om at vælge et medlem at opdatere
+            System.out.println("\nIndtast nummeret på medlemmet, du vil opdatere (eller 0 for at afslutte):");
+            int valg;
 
-                    // Erstatter "Ikke betalt" med "Betalt" i den valgte linje
-                    String opdateretR = mangleBetaling.replace("Ikke betalt", "Betalt");
-
-                    // Opdater linjen i den oprindelige liste
-                    linjer.set(linjer.indexOf(mangleBetaling), opdateretR);
-
-                    // Gem de opdaterede linjer tilbage i filen
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN))) {
-                        for (String linje : linjer) {
-                            writer.write(linje);
-                            writer.newLine();
-                        }
-                    }
-                    System.out.println("Status for medlemmet er opdateret fra 'Ikke betalt' til 'Betalt'.");
-                }
-                scanner.close();
+            try {
+                valg = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt input. Prøv igen.");
+                continue;
             }
 
+            // Hvis brugeren vælger 0, afslut
+            if (valg == 0) {
+                System.out.println("Afslutter opdatering.");
+                break;
+            }
+
+            // Kontroller om valget er gyldigt
+            if (valg < 1 || valg > restance.size()) {
+                System.out.println("Ugyldigt valg. Prøv igen.");
+                continue;
+            }
+
+            // Hent den valgte linje
+            String mangleBetaling = restance.get(valg - 1);
+
+            // Erstat "Ikke betalt" med "Betalt"
+            String opdateretR = mangleBetaling.replace("Ikke betalt", "Betalt");
+
+            // Opdater linjen i den originale liste
+            linjer.set(linjer.indexOf(mangleBetaling), opdateretR);
+
+            // Opdater listen over restance for visning
+            restance.set(valg - 1, opdateretR);
+
+            System.out.println("Status opdateret for medlem:\n" + opdateretR);
         }
-    public static void main(String[] args) throws Exception {
-        restance();
+
+        // Skriv de opdaterede linjer tilbage til filen
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN))) {
+            for (String linje : linjer) {
+                writer.write(linje);
+                writer.newLine();
+            }
         }
+
+        System.out.println("Alle ændringer er gemt i tekstfilen.");
+        scanner.close();
     }
 
+    public static void main(String[] args) throws IOException {
+        restance();
+    }
+}
