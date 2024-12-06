@@ -13,6 +13,7 @@ public class Restanse {
     public static void restance() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
+        while (true) {
         // Læs alle linjer i filen
         List<String> linjer = Files.readAllLines(Path.of(FILNAVN));
 
@@ -33,7 +34,7 @@ public class Restanse {
             System.out.println((i + 1) + ": " + restance.get(i));
         }
 
-        while (true) {
+
             // Bed brugeren om at vælge et medlem at opdatere
             System.out.println("\nIndtast nummeret på medlemmet, du vil opdatere (eller 0 for at afslutte):");
             int valg;
@@ -70,7 +71,8 @@ public class Restanse {
             restance.set(valg - 1, opdateretR);
 
             System.out.println("Status opdateret for medlem:\n" + opdateretR);
-        }
+            System.out.println();
+
 
         // Skriv de opdaterede linjer tilbage til filen
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN))) {
@@ -78,6 +80,7 @@ public class Restanse {
                 writer.write(linje);
                 writer.newLine();
             }
+        }
         }
 
         System.out.println("Alle ændringer er gemt i tekstfilen.");
