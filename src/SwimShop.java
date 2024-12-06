@@ -28,11 +28,13 @@ public class SwimShop {
         final private String customerId;
         final private double amountPaid;
         private double change;
+        private List<Vare> kvittering;
 
-        public Revenue(String customerId, double amountPaid) {
+        public Revenue(String customerId, double amountPaid, List<Vare> kvittering) {
             this.customerId = customerId;
             this.amountPaid = amountPaid;
             this.change = 0.0;
+            this.kvittering = kvittering;
         }
 
         public void betalingshistorik() {
@@ -64,7 +66,17 @@ public class SwimShop {
 
         @Override
         public String toString() {
-            return "Customer ID: " + customerId + ", Amount Paid: " + amountPaid + ", Change: " + change;
+            StringBuilder itemsString = new StringBuilder();
+            for (Vare item : kvittering){
+                itemsString.append(item.getNavn()).append(" (").append(item.getPris()).append("kr.), ");
+            }
+            if (itemsString.length() > 0) {
+                itemsString.setLength(itemsString.length() - 2);
+            }
+            return "Customer ID: " + customerId +
+                    ", Amount Paid: " + amountPaid +
+                    ", Change: " + change +
+                    ", Purchased items: " + itemsString.toString();
         }
     }
     public static void startService() {
@@ -80,31 +92,38 @@ public class SwimShop {
             System.out.println("4. Dailypass for Joe Rogan (1 kr.)");
             System.out.println("0. Færdig med at vælge dailypasses");
 
-            int choice = scanner.nextInt();
+            try {
 
-            if (choice == 0) {
-                break;
+                int choice = scanner.nextInt();
+
+                if (choice == 0) {
+                    break;
+                }
+
+                double dailyPassPrice = 0;
+                switch (choice) {
+                    case 1:
+                        dailyPassPrice = 70;
+                        break;
+                    case 2:
+                        dailyPassPrice = 30;
+                        break;
+                    case 3:
+                        dailyPassPrice = 50;
+                        break;
+                    case 4:
+                        dailyPassPrice = 1;
+                        break;
+                    default:
+                        System.out.println("Ugyldigt valg");
+                        continue;
+                }
+                selectedDailyPasses.add(dailyPassPrice);
+            } catch (Exception e) {
+                System.out.println("Der opstod en fejl: " + e.getMessage());
+                scanner.nextLine(); //rydder buffer så den ikke bliver ved mere
             }
 
-            double dailyPassPrice = 0;
-            switch (choice) {
-                case 1:
-                    dailyPassPrice = 70;
-                    break;
-                case 2:
-                    dailyPassPrice = 30;
-                    break;
-                case 3:
-                    dailyPassPrice = 50;
-                    break;
-                case 4:
-                    dailyPassPrice = 1;
-                    break;
-                default:
-                    System.out.println("Ugyldigt valg");
-                    continue;
-            }
-            selectedDailyPasses.add(dailyPassPrice);
         }
 
         // Produkt valg
@@ -117,35 +136,43 @@ public class SwimShop {
             System.out.println("5. Håndklæde (5 kr.)");
             System.out.println("0. Færdig med at vælge produkter");
 
-            int addOn = scanner.nextInt();
+            try {
 
-            if (addOn == 0) {
-                break;
-            }
 
-            Vare selectedProduct = null;
-            switch (addOn) {
-                case 1:
-                    selectedProduct = new Vare("Badetøj til Mænd", 300);
+                int addOn = scanner.nextInt();
+
+                if (addOn == 0) {
                     break;
-                case 2:
-                    selectedProduct = new Vare("Badetøj til Kvinder", 800);
-                    break;
-                case 3:
-                    selectedProduct = new Vare("Badetøj til Børn", 1000);
-                    break;
-                case 4:
-                    selectedProduct = new Vare("Svømmebriller", 400);
-                    break;
-                case 5:
-                    selectedProduct = new Vare("Håndklæde", 5);
-                    break;
-                default:
-                    System.out.println("Ugyldigt valg");
-                    continue;
+                }
+
+                Vare selectedProduct = null;
+                switch (addOn) {
+                    case 1:
+                        selectedProduct = new Vare("Badetøj til Mænd", 300);
+                        break;
+                    case 2:
+                        selectedProduct = new Vare("Badetøj til Kvinder", 800);
+                        break;
+                    case 3:
+                        selectedProduct = new Vare("Badetøj til Børn", 1000);
+                        break;
+                    case 4:
+                        selectedProduct = new Vare("Svømmebriller", 400);
+                        break;
+                    case 5:
+                        selectedProduct = new Vare("Håndklæde", 5);
+                        break;
+                    default:
+                        System.out.println("Ugyldigt valg");
+                        continue;
+                }
+                selectedProducts.add(selectedProduct);
+            } catch (Exception e) {
+                System.out.println("Der opstod en fejl: " + e.getMessage());
+                scanner.next();
             }
-            selectedProducts.add(selectedProduct);
         }
+
 
         // Kvitteringen
         double totalDailyPassPrice = selectedDailyPasses.stream().mapToDouble(Double::doubleValue).sum();
@@ -168,8 +195,9 @@ public class SwimShop {
         while (true) {
             System.out.println("Indtast Navn:");
             customerId = scanner.nextLine();
-            if (customerId.isBlank() || !customerId.matches("[a-zA-Z -]+")) {
+            if (customerId.isBlank() || !customerId.matches("[a-zA-Z -æøåÆØÅ]+") || customerId.equals("-") || customerId.split("-").length>2) {
                 System.out.println("Ugyldigt navn");
+                System.out.println("Indtast venligst et navn");
             } else {
                 break;
             }
@@ -180,7 +208,7 @@ public class SwimShop {
         double amountPaid = scanner.nextDouble();
 
         // Opret payment objekt
-        Revenue payment = new Revenue(customerId, amountPaid);
+        Revenue payment = new Revenue(customerId, amountPaid, selectedProducts);
         payment.calculateChange(totalPrice);
 
         System.out.println("Betaling gennemført: ");
