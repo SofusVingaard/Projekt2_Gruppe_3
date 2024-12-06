@@ -6,3 +6,6 @@ MedlemsID: 14, Navn: carl, Dato: 20-08-2024, Disciplin: crawl, Træningstid: 5.3
 MedlemsID: 15, Navn: bo, Dato: 20-08-2024, Disciplin: bryst, Træningstid: 4.30
 MedlemsID: 13, Navn: Sexyy Redd, Dato: 13-09-2024, Disciplin: butterfly, Træningstid: 2.50
 MedlemsID: 14, Navn: christoffer, Dato: 22-11-1999, Disciplin: bryst, Træningstid: 12.32
+MedlemsID: 16, Navn: cas, Alder: 12, Dato: 13-11-2024, Disciplin: ryg, Træningstid: 2.30
+MedlemsID: 14, Navn: christoffer, Alder: 99999, Dato: 20-08-2001, Disciplin: crawl, Træningstid: 2.45
+MedlemsID: 15, Navn: bo, Alder: 17, Dato: 20-02-2023, Disciplin: ryg, Træningstid: 2.55

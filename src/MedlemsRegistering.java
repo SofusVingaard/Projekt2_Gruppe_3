@@ -31,14 +31,21 @@ public class MedlemsRegistering {
         String kontigent;
         double pris = 0;
         int alder;
+        int konkurrence=0;
+        int motion=0;
+        String medlemData;
+        String konkurrenceDisciplin = "";
+
 
         int medlemsId= findMaxMedlemsId()+1;
         //Indtast medlemmets information
         System.out.println("Indtast Medlemmets navn:");
         String navn;
         while (true) {
+            konkurrence=0;
+            motion=0;
             navn = sc.nextLine();
-            if (navn.isBlank() || !navn.matches("[a-zA-Z -]+") || navn.equals("-") || navn.split("-").length>2){
+            if (navn.isBlank() || !navn.matches("[a-zA-Z -æøåÆØÅ]+") || navn.equals("-") || navn.split("-").length>2){
                 System.out.println("Ugyldigt navn");
                 System.out.println("Indtast venligst et navn");
             }
@@ -142,9 +149,33 @@ public class MedlemsRegistering {
         System.out.println("Et passivt medlemskab koster 500kr");
         String type;
         while (true) {
+
             type = sc.nextLine();
             if (type.equalsIgnoreCase("Aktiv")) {
                 type = AKTIV;
+                System.out.println("Ønsker du at være konkurrence svømmer eller motions svømmer? Konkurrence/Motion");
+                while(true) {
+                    String svømmer = sc.nextLine();
+                    if (svømmer.equalsIgnoreCase("Konkurrence")) {
+
+                            System.out.println("Hvilken disciplin? " + RYG + " " + BRYST + " " + BUTTERFLY + " " + CRAWL);
+                        while(true) {
+                            konkurrenceDisciplin = sc.nextLine();
+                            if (konkurrenceDisciplin.equalsIgnoreCase(RYG) || konkurrenceDisciplin.equalsIgnoreCase(BRYST) || konkurrenceDisciplin.equalsIgnoreCase(BUTTERFLY) || konkurrenceDisciplin.equalsIgnoreCase(CRAWL)) {
+                                System.out.println("Du er nu registeret som " + konkurrenceDisciplin + " svømmer");
+                                konkurrence = 1;
+                                break;
+                            } else {
+                                System.out.println("Indtast "+RYG+ " " + BRYST + " " + BUTTERFLY + " " + CRAWL);
+                            }
+                        } break;
+                    }else if (svømmer.equalsIgnoreCase("Motion")) {
+                        motion = 1;
+                        break;
+                    } else {
+                        System.out.println("Indtast motion eller konkurrence");
+                    }
+                }
                 break;
             } else if (type.equalsIgnoreCase("Passiv")) {
                 type = PASSIV;
@@ -185,8 +216,13 @@ public class MedlemsRegistering {
                 System.out.println("Indtast nu eller senere");
             }
         }
-
-        String medlemData = MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
+        if (konkurrence == 1){
+            medlemData=MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent+", Konkurrence svømmer i "+konkurrenceDisciplin;
+        } else if (motion==1) {
+            medlemData=MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent+", Motionssvømmer";
+        } else {
+            medlemData = MEDLEMSID + medlemsId + " " + NAVN + navn + ", " + ALDER + alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
+        }
             //BufferedWriter skriver medlemsData ind i tekst filen Medlemmer
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN, true))) {
             writer.write(medlemData);
@@ -246,7 +282,7 @@ public class MedlemsRegistering {
                     System.out.println("indtast svømmers navn");
                     while (true) {
                         navn = keyboard.nextLine();
-                        if (navn.isBlank() || !navn.matches("[a-zA-Z -]+") || navn.equals("-") || navn.split("-").length>2){
+                        if (navn.isBlank() || !navn.matches("[a-zA-Z æøåÆØÅ-]+") || navn.equals("-") || navn.split("-").length>2){
                             System.out.println("fejl");
                             System.out.println("Indtast venligst et navn");
                         }
@@ -383,6 +419,8 @@ public class MedlemsRegistering {
         } catch (IOException e) {
             System.out.println("Fejl ved læsning af fil: " + e.getMessage());
         }
+
+
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
