@@ -235,18 +235,17 @@ public class MedlemsRegistering {
 
     public static void konkurrenceStævne() {
         Scanner keyboard = new Scanner(System.in);
-        String stævne;
-        String navn;
+        String stævne = "";
         String disciplin;
         int placering = 0;
         String speedo = "";
         String stævnePlacering;
         String yapping;
-        LocalDate idag= LocalDate.now();
-        DateTimeFormatter pattern= DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
-        String formatdato=idag.format(pattern);
+        String dato;
+
 
         boolean keepSwimming = true;
+
         try (BufferedReader reader = new BufferedReader(new FileReader(KONKURRENCE))) {
             System.out.println("Indtast navn på stævne");
             while (true) {
@@ -258,28 +257,43 @@ public class MedlemsRegistering {
                 else
                     break;
             }
+            while (true) {
+                System.out.println("Indtast træningens dato (format: dd-mm-yyyy):");
+                dato = keyboard.nextLine();
+
+                // Tjek om datoen er gyldig
+                if (Leaderboard.Træningstider.erGyldigDato(dato)) {
+                    break;
+                } else {
+                    System.out.println("Ugyldig dato, prøv igen.");
+                }
+            }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                 // Indtaster stævnets navn og gemmer det
                 //Bruges til at lave første bogstav i et navn stort
-                String firstLetter= stævne.substring(0, 1);
-                firstLetter=firstLetter.toUpperCase();
-                String restOfWord=stævne.substring(1);
-                String stortBogstav= firstLetter+restOfWord;
+                    String firstLetter = stævne.substring(0, 1);
+                    firstLetter = firstLetter.toUpperCase();
+                    String restOfWord = stævne.substring(1);
+                    String stortBogstav = firstLetter + restOfWord;
 
-                writer.newLine();
-                writer.write(stortBogstav);
-                writer.newLine();
-                writer.write("Dato: "+formatdato.formatted(pattern));
-                writer.newLine();
-                }
+                    writer.newLine();
+                    writer.write(stortBogstav);
+                    writer.newLine();
+                    writer.write("Dato: " + dato);
+                    writer.newLine();
+            }
                 catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);}
+
                 // vi starter et while loop for at vi kan registrere flere svømmere til stævnet
                 while (keepSwimming) {
-                    System.out.println("indtast svømmers navn");
+
+
+                    // Skal slettes medmindre thomas ændrer koden for meget i opret træningstider
+                    /*System.out.println("indtast svømmers navn");
                     while (true) {
                         navn = keyboard.nextLine();
                         if (navn.isBlank() || !navn.matches("[a-zA-Z æøåÆØÅ-]+") || navn.equals("-") || navn.split("-").length>2){
@@ -289,6 +303,20 @@ public class MedlemsRegistering {
                         else {
                             break;
                         }
+                    }*/
+
+
+                    // Træningstid for eksisterende medlem
+                    System.out.println("Indtast medlemsID:");
+                    int medlemsId = keyboard.nextInt();
+                    keyboard.nextLine(); // Fjern newline karakteren efter nextInt
+
+                    // Hent medlem ved medlemsID
+                    String medlemNavn = Leaderboard.Træningstider.findMedlemNavn(medlemsId);
+                    int alder = Leaderboard.findAlderByMedlemsId(medlemsId);
+                    if (medlemNavn == null) {
+                        System.out.println("MedlemsID ikke fundet.");
+                        return;
                     }
                     System.out.println("Indtast disciplin. (" + RYG + "," + CRAWL + "," + BRYST + "," + BUTTERFLY);
                     // Vi tjekker om indputtet vi skriver er en valid disciplin
@@ -358,13 +386,13 @@ public class MedlemsRegistering {
                             } catch (NumberFormatException p) {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund");
                             }
-                            //Bruges til at lave første bogstav i et navn stort
-                            String firstLetter= navn.substring(0, 1);
+                            //Bruges til at lave første bogstav i et navn stort.
+                            /*String firstLetter= navn.substring(0, 1);
                             firstLetter=firstLetter.toUpperCase();
                             String restOfWord=navn.substring(1);
-                            String stortBogstav= firstLetter+restOfWord;
+                            String stortBogstav= firstLetter+restOfWord;*/
 
-                            stævnePlacering = "Svømmer: " + stortBogstav + ", Disciplin: " + disciplin + ", Placering: " + placering + ", Tid  " + speedo;
+                            stævnePlacering = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Disciplin: " + disciplin + ", Placering: " + placering + ", Tid  " + speedo;
                             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
                                 writer.write(stævnePlacering);
                                 writer.newLine();
@@ -424,7 +452,7 @@ public class MedlemsRegistering {
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        tilføjMedlem();
+        konkurrenceStævne();
 
         while (true) {
             System.out.println("Vælg en mulighed:");
