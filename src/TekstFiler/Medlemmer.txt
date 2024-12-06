@@ -1,12 +1,12 @@
-Medlemsnummer: 1 Navn: Margit, Alder: 32, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt
+Medlemsnummer: 1 Navn: Margit, Alder: 32, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 2 Navn: Thommy, Alder: 69, Medlemsskab: Aktiv, Aldersgruppe: 60+, Betalt
 Medlemsnummer: 3 Navn: Sofus, Alder: 27, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 4 Navn: Sofus, Alder: 34, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
-Medlemsnummer: 5 Navn: Christoffer, Alder: 40, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt
+Medlemsnummer: 5 Navn: Christoffer, Alder: 40, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 6 Navn: Charles, Alder: 69, Medlemsskab: Aktiv, Aldersgruppe: 60+, Betalt
-Medlemsnummer: 7 Navn: sofus, Alder: 34, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke Betalt
+Medlemsnummer: 7 Navn: sofus, Alder: 34, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 7 Navn: Christoffer, Alder: 24, Medlemsskab: Passiv, Aldersgruppe: Senior, Betalt
-Medlemsnummer: 8 Navn: Anthony, Alder: 25, Medlemsskab: Passiv, Aldersgruppe: Senior, Ikke betalt
+Medlemsnummer: 8 Navn: Anthony, Alder: 25, Medlemsskab: Passiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 9 Navn: kian, Alder: 23, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 10 Navn: ropert, Alder: 33, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt
 Medlemsnummer: 11 Navn: gert, Alder: 50, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt

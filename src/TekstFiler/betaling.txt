@@ -18,3 +18,4 @@ Customer ID: 123, Amount Paid: 20.0, Change: 15.0
 Customer ID: christoffer, Amount Paid: 55.0, Change: 0.0
 Customer ID: mj, Amount Paid: 370.0, Change: 0.0
 Customer ID: WORLDSTAR, Amount Paid: 2000.0, Change: 100.0
+Customer ID: Khabib Nurmagomedov, Amount Paid: 5000.0, Change: 1274.0, Purchased items: Håndklæde (5.0kr.), Håndklæde (5.0kr.), Håndklæde (5.0kr.), Håndklæde (5.0kr.), Håndklæde (5.0kr.), Badetøj til Mænd (300.0kr.), Badetøj til Kvinder (800.0kr.), Badetøj til Børn (1000.0kr.), Badetøj til Børn (1000.0kr.), Svømmebriller (400.0kr.)

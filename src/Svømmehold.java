@@ -32,22 +32,22 @@ public class Svømmehold {
             switch (hold) {
                 case 1:
                 System.out.println("Du har valgt Bryst ");
-                System.out.println("Phillip Mortensen er din træner, der er hold tider Mandag 18:00");
+                System.out.println("Mo Mortensen er din træner, der er hold tider Mandag 18:00");
                 break;
 
                 case 2:
                 System.out.println("Du har valgt Crawl ");
-                System.out.println("Phillip Mortensen er din træner, der er hold tider Mandag 19:00");
+                System.out.println("Mo Mortensen er din træner, der er hold tider Mandag 19:00");
                 break;
 
                 case 3:
                 System.out.println("Du har valgt Butterfly ");
-                System.out.println("Mads Mortensen er din træner, der er hold tider Mandag 20:00");
+                System.out.println("Mahad Mortensen er din træner, der er hold tider Mandag 20:00");
                 break;
 
                 case 4:
                 System.out.println("Du har valgt Ryg ");
-                System.out.println("Du har Mads Mortensen er din træner, der er hold tider tirsdag 18:00");
+                System.out.println("Mahad Mortensen er din træner, der er hold tider tirsdag 18:00");
                 break;
 
             }
