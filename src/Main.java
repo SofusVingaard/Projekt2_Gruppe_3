@@ -20,6 +20,7 @@ public class Main {
             System.out.println("7: Køb dailyPass til svømmehallen");
             System.out.println("8: Køb vare i SwipShop");
             System.out.println("9: Indtast et konkurrence stævne");
+            System.out.println("10: Hvis du vil søge efter et konkurrence stævne");
             System.out.println("0: Luk Programmet:");
 
                 try { tast = keyboard.nextInt();
@@ -31,7 +32,7 @@ public class Main {
                     keepGoing = false;
 
                 }
-                 else if (tast >= 10 || tast<=-1) {
+                 else if (tast >= 11 || tast<=-1) {
                     System.out.println("ugyldigt");
                     return;
                 }
@@ -63,10 +64,13 @@ public class Main {
                     case 9:
                         MedlemsRegistering.konkurrenceStævne();
                         break;
+                    case 10:
+                        MedlemsRegistering.visKonkurrencer();
+                        break;
                  }
             }
                 catch (InputMismatchException e) {
-                    System.out.println("Forkert input. Indtast et tal mellem 0 og 9");
+                    System.out.println("Forkert input. Indtast et tal mellem 0 og 10");
                     System.out.println();
                     keyboard.nextLine();
             } catch (Exception e){

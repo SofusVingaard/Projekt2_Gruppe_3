@@ -1,9 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -216,12 +213,13 @@ public class MedlemsRegistering {
                 System.out.println("Indtast nu eller senere");
             }
         }
+        String stortStart=stortStartBogstav(navn);
         if (konkurrence == 1){
-            medlemData=MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent+", Konkurrence svømmer i "+konkurrenceDisciplin;
+            medlemData=MEDLEMSID+medlemsId+" "+NAVN+stortStart + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent+", Konkurrence svømmer i "+konkurrenceDisciplin;
         } else if (motion==1) {
-            medlemData=MEDLEMSID+medlemsId+" "+NAVN+navn + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent+", Motionssvømmer";
+            medlemData=MEDLEMSID+medlemsId+" "+NAVN+stortStart + ", " +ALDER+ alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent+", Motionssvømmer";
         } else {
-            medlemData = MEDLEMSID + medlemsId + " " + NAVN + navn + ", " + ALDER + alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
+            medlemData = MEDLEMSID + medlemsId + " " + NAVN + stortStart + ", " + ALDER + alder + ", " + type + ", Aldersgruppe: " + svømmekategori + ", " + kontigent;
         }
             //BufferedWriter skriver medlemsData ind i tekst filen Medlemmer
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILNAVN, true))) {
@@ -269,15 +267,10 @@ public class MedlemsRegistering {
                 }
             }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
-                // Indtaster stævnets navn og gemmer det
-                //Bruges til at lave første bogstav i et navn stort
-                    String firstLetter = stævne.substring(0, 1);
-                    firstLetter = firstLetter.toUpperCase();
-                    String restOfWord = stævne.substring(1);
-                    String stortBogstav = firstLetter + restOfWord;
 
+                // Indtaster stævnets navn og gemmer det
                     writer.newLine();
-                    writer.write(stortBogstav);
+                    writer.write(stortStartBogstav(stævne));
                     writer.newLine();
                     writer.write("Dato: " + dato);
                     writer.newLine();
@@ -447,10 +440,54 @@ public class MedlemsRegistering {
         } catch (IOException e) {
             System.out.println("Fejl ved læsning af fil: " + e.getMessage());
         }
+    }
+    public static String stortStartBogstav(String start){
+        if (start == null || start.isEmpty()) {
+            return start;  // Hvis input er tomt, returner det som det er
+        }
+        String firstLetter = start.substring(0, 1).toUpperCase();
+        String restOfWord = start.substring(1);
 
+        return firstLetter + restOfWord;
+    }
 
+    public static void visKonkurrencer(){
+        Scanner keyboard= new Scanner(System.in);
+
+        try (BufferedReader read= new BufferedReader(new FileReader(KONKURRENCE))) {
+            boolean blank = false;
+            boolean found = false;
+            String line;
+            String tast;
+
+                System.out.println("Søg efter et konkurrence stævne");
+                System.out.println("Tast 0 for at afslutte");
+                tast = keyboard.nextLine();
+
+                while ((line = read.readLine()) != null) {
+                    if (line.strip().equalsIgnoreCase("")) {
+                        blank = true;
+                        found = false;
+                        continue;
+                    } else {
+                        blank = false;
+                    }
+                    if (line.equalsIgnoreCase(tast)) {
+                        found = true;
+                        continue;
+                    }
+                    if (!blank && found) {
+                        System.out.println(line);
+                    }
+                }
+            System.out.println();
+            }
+        catch(IOException e){
+                    System.out.println("fejl under læsning");
+        }
     }
     public static void main(String[] args) {
+        visKonkurrencer();
         Scanner scanner = new Scanner(System.in);
         konkurrenceStævne();
 
@@ -475,4 +512,5 @@ public class MedlemsRegistering {
             }
         }
     }
+
 }
