@@ -78,7 +78,7 @@ public class Leaderboard {
     }
 
     // Find medlemmers alder
-    private static int findAlderByMedlemsId(int medlemsId) {
+    static int findAlderByMedlemsId(int medlemsId) {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/TekstFiler/Medlemmer.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -203,7 +203,7 @@ public class Leaderboard {
         }
 
         // gør så at man ikke kan skrive en dato ind der ikke findes
-        private static boolean erGyldigDato(String dato) {
+        static boolean erGyldigDato(String dato) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             sdf.setLenient(false);  // Gør dato-validering streng
             try {

@@ -461,20 +461,17 @@ public class MedlemsRegistering {
             String tast;
 
                 System.out.println("Søg efter et konkurrence stævne");
-                System.out.println("Tast 0 for at afslutte");
                 tast = keyboard.nextLine();
 
                 while ((line = read.readLine()) != null) {
                     if (line.strip().equalsIgnoreCase("")) {
                         blank = true;
                         found = false;
-                        continue;
                     } else {
                         blank = false;
                     }
                     if (line.equalsIgnoreCase(tast)) {
                         found = true;
-                        continue;
                     }
                     if (!blank && found) {
                         System.out.println(line);
