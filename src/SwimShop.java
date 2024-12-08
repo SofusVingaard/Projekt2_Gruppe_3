@@ -190,7 +190,7 @@ public class SwimShop {
         System.out.println("Total pris: " + totalPrice + " kr.");
 
         // Navn input
-        scanner.nextLine(); // Rydder buffer
+        scanner.nextLine(); //  Rydder buffer
         String customerId;
         while (true) {
             System.out.println("Indtast Navn:");
