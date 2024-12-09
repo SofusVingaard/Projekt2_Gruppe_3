@@ -1,4 +1,5 @@
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
@@ -42,6 +43,8 @@ public class Main {
                         System.out.println("Vores åbningstider er");
                         System.out.println("Mandag-fredag 10-20");
                         System.out.println("lørdag-søndag 10-18");
+                        System.out.println();
+
                         break;
                     case 2:
                         MedlemsRegistering.tilføjMedlem();
@@ -76,7 +79,8 @@ public class Main {
             } catch (Exception e){
                     System.out.println("Der skete en fejl "+e.getMessage()+" prøv igen");
                 }
-        }
+
+            }
     }
 }
 
