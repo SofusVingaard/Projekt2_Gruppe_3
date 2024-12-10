@@ -261,7 +261,7 @@ public class Leaderboard {
             }
 
             System.out.println("Indtast disciplin (f.eks. Crawl, Ryg, Bryst, Butterfly):");
-            String disciplin = sc.nextLine();
+            String disciplin;
             while (true) {
                 disciplin = sc.nextLine();
                 if (disciplin.equalsIgnoreCase("RYG") || disciplin.equalsIgnoreCase("CRAWL") || disciplin.equalsIgnoreCase("BRYST") || disciplin.equalsIgnoreCase("BUTTERFLY")) {
@@ -273,31 +273,39 @@ public class Leaderboard {
             }
 
             // formateringen på tiden
-            System.out.println("Indtast træningstid (minut.sekund):");
-            String træningstidInput = sc.nextLine();
+            String træningstidInput;
+            while (true) {
+                System.out.println("Indtast træningstid (minut.sekund):");
 
-            // sørger for at formatet er rigtigt
-            double træningstid;
-            try {
-                træningstid = Double.parseDouble(træningstidInput);
-                if (træningstid <= 0) {
-                    System.out.println("Tiden skal være et positivt tal.");
-                    return;
+                træningstidInput = sc.nextLine();
+
+                // sørger for at formatet er rigtigt
+                double træningstid;
+                try {
+                    træningstid = Double.parseDouble(træningstidInput);
+                    if (træningstid <= 0) {
+                        System.out.println("Tiden skal være et positivt tal.");
+                    } else {
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Ugyldigt format for tid. Brug formatet Minut.Sekund (f.eks. 2.30).");
+
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Ugyldigt format for tid. Brug formatet Minut.Sekund (f.eks. 2.30).");
-                return;
             }
 
-            String træningData = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Alder: " + alder +
-                    ", Dato: " + dato + ", Disciplin: " + disciplin + ", Træningstid: " + træningstidInput;
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(TRÆNING_FIL, true))) {
-                writer.write(træningData);
-                writer.newLine();
-                System.out.println("Træningstid for " + medlemNavn + " er oprettet.");
-            } catch (IOException e) {
-                System.out.println("Fejl ved skrivning til træningstidfil.");
-            }
+
+                String træningData = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Alder: " + alder +
+                        ", Dato: " + dato + ", Disciplin: " + disciplin + ", Træningstid: " + træningstidInput;
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(TRÆNING_FIL, true))) {
+                    writer.write(træningData);
+                    writer.newLine();
+                    System.out.println("Træningstid for " + medlemNavn + " er oprettet.");
+                    System.out.println();
+                } catch (IOException e) {
+                    System.out.println("Fejl ved skrivning til træningstidfil.");
+                }
+
         }
 
             public static void main(String[] args) {
