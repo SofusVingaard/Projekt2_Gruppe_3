@@ -195,7 +195,7 @@ public class SwimShop {
         while (true) {
             System.out.println("Indtast Navn:");
             customerId = scanner.nextLine();
-            if (customerId.isBlank() || !customerId.matches("[a-zA-Z -æøåÆØÅ]+") || customerId.equals("-") || customerId.split("-").length>2) {
+            if (customerId.isBlank() || !customerId.matches("[a-zA-ZæøåÆØÅ\\- ]+") || customerId.equals("-") || customerId.split("-").length>2) {
                 System.out.println("Ugyldigt navn");
                 System.out.println("Indtast venligst et navn");
             } else {
