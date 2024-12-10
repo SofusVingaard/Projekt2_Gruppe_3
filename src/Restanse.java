@@ -82,9 +82,9 @@ public class Restanse {
             }
         }
         }
-
         System.out.println("Alle ændringer er gemt i tekstfilen.");
-        scanner.close();
+
+
     }
 
     public static void main(String[] args) throws IOException {
