@@ -42,7 +42,7 @@ public class MedlemsRegistering {
             konkurrence=0;
             motion=0;
             navn = sc.nextLine();
-            if (navn.isBlank() || !navn.matches("[a-zA-Z -æøåÆØÅ]+") || navn.equals("-") || navn.split("-").length>2){
+            if (navn.isBlank() || !navn.matches("[a-zA-ZæøåÆØÅ\\- ]+") || navn.equals("-") || navn.split("-").length>2){
                 System.out.println("Ugyldigt navn");
                 System.out.println("Indtast venligst et navn");
             }
