@@ -120,6 +120,7 @@ public class Leaderboard {
         Collections.sort(over18, Comparator.comparing(Træning::getDisciplin).thenComparingDouble(Træning::getTræningstid));
 
         // Vis top 5 kommer an på hvilken man vælger
+
         if (valg == 1) {
             visTop5(under17, "Under 18");
         } else if (valg == 2) {
@@ -161,16 +162,30 @@ public class Leaderboard {
         læsTræningstiderFraFil();
 
         Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Vælg en mulighed:");
-            System.out.println("1. Se Under 18 leaderboard");
-            System.out.println("2. Se Senior leaderboard");
-            System.out.println("3. Afslut");
+         while (true) {
 
-            int valg = scanner.nextInt();
-            if (valg == 3) {
-                System.out.println("Afslutter programmet.");
-                break;
+
+            int valg = 0;
+            while (true) {
+                System.out.println("Vælg en mulighed:");
+                System.out.println("1. Se Under 18 leaderboard");
+                System.out.println("2. Se Senior leaderboard");
+                System.out.println("3. Afslut");
+               try {
+                   valg = Integer.parseInt(scanner.nextLine());
+               }  catch (Exception e){
+                   System.out.println("Fejl");
+               }
+               if (valg==1||valg==2){
+                   break;
+               }
+
+               if (valg == 3) {
+                    return;
+                } else if (valg<=0 || valg>=4){
+
+                } else {
+                }
             }
             visLeaderboard(valg);
         }
