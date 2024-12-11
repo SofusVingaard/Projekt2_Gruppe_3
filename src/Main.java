@@ -18,10 +18,9 @@ public class Main {
             System.out.println("4: Gå til leaderboard:");
             System.out.println("5: Opret træningstid");
             System.out.println("6: Se om medlemmer er i restanse");
-            System.out.println("7: Køb dailyPass til svømmehallen");
-            System.out.println("8: Køb vare i SwipShop");
-            System.out.println("9: Indtast et konkurrence stævne");
-            System.out.println("10: Hvis du vil søge efter et konkurrence stævne");
+            System.out.println("7: Køb vare i SwimShop");
+            System.out.println("8: Indtast et konkurrence stævne");
+            System.out.println("9: Hvis du vil søge efter et konkurrence stævne");
             System.out.println("0: Luk Programmet:");
 
             try { tast = keyboard.nextInt();
@@ -44,7 +43,6 @@ public class Main {
                         System.out.println("Mandag-fredag 10-20");
                         System.out.println("lørdag-søndag 10-18");
                         System.out.println();
-
                         break;
                     case 2:
                         MedlemsRegistering.tilføjMedlem();
@@ -64,16 +62,16 @@ public class Main {
                     case 7:
                         SwimShop.startService();
                         break;
-                    case 9:
+                    case 8:
                         MedlemsRegistering.konkurrenceStævne();
                         break;
-                    case 10:
+                    case 9:
                         MedlemsRegistering.visKonkurrencer();
                         break;
                 }
             }
             catch (InputMismatchException e) {
-                System.out.println("Forkert input. Indtast et tal mellem 0 og 10");
+                System.out.println("Forkert input. Indtast et tal mellem 0 og 9");
                 System.out.println();
                 keyboard.nextLine();
             } catch (Exception e){
