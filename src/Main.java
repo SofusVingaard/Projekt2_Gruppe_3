@@ -32,9 +32,9 @@ public class Main {
                     keepGoing = false;
 
                 }
-                else if (tast >= 11 || tast<=-1) {
+                else if (tast >= 10 || tast<=-1) {
                     System.out.println("ugyldigt");
-                    return;
+                    System.out.println();
                 }
                 switch (tast) {
 
@@ -77,7 +77,6 @@ public class Main {
             } catch (Exception e){
                 System.out.println("Der skete en fejl "+e.getMessage()+" prøv igen");
             }
-
         }
     }
 }
