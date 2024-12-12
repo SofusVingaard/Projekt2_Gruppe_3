@@ -1,15 +1,13 @@
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println("Velkommen til Svømmeklubbben Målev Dolphins");
 
         Scanner keyboard = new Scanner(System.in);
         boolean keepGoing = true;
         int tast;
-
 
         while (keepGoing) {
             System.out.println("1: Se åbningstider:");

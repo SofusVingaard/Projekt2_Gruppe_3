@@ -32,9 +32,8 @@ public class MedlemsRegistering {
         int motion=0;
         String medlemData;
         String konkurrenceDisciplin = "";
-
-
         int medlemsId= findMaxMedlemsId()+1;
+
         //Indtast medlemmets information
         System.out.println("Indtast Medlemmets navn:");
         String navn;
@@ -53,8 +52,7 @@ public class MedlemsRegistering {
         System.out.println("Indtast Medlemmets alder:");
         while (true) {
             try { alder = sc.nextInt();
-            sc.nextLine();
-
+                sc.nextLine();
                 if (alder <= 17 && alder >= 1) {
                     svømmekategori = "Junior";
                     // De her linjer bruges til at ændre vores kontigent pris i programmet fra et tekst dokument
@@ -83,7 +81,6 @@ public class MedlemsRegistering {
                         System.out.println("Ugyldigt input");
                         System.out.println("Skrive din alder");
                     }
-
                     break;
                 } else if (alder <= 60 && alder >= 18) {
                     svømmekategori = "Senior";
@@ -240,8 +237,6 @@ public class MedlemsRegistering {
         String stævnePlacering;
         String yapping;
         String dato;
-
-
         boolean keepSwimming = true;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(KONKURRENCE))) {
@@ -283,22 +278,6 @@ public class MedlemsRegistering {
 
                 // vi starter et while loop for at vi kan registrere flere svømmere til stævnet
                 while (keepSwimming) {
-
-
-                    // Skal slettes medmindre thomas ændrer koden for meget i opret træningstider
-                    /*System.out.println("indtast svømmers navn");
-                    while (true) {
-                        navn = keyboard.nextLine();
-                        if (navn.isBlank() || !navn.matches("[a-zA-Z æøåÆØÅ-]+") || navn.equals("-") || navn.split("-").length>2){
-                            System.out.println("fejl");
-                            System.out.println("Indtast venligst et navn");
-                        }
-                        else {
-                            break;
-                        }
-                    }*/
-
-
                     // Træningstid for eksisterende medlem
                     System.out.println("Indtast medlemsID:");
                     int medlemsId = keyboard.nextInt();
@@ -306,7 +285,6 @@ public class MedlemsRegistering {
 
                     // Hent medlem ved medlemsID
                     String medlemNavn = Leaderboard.Træningstider.findMedlemNavn(medlemsId);
-                    int alder = Leaderboard.findAlderByMedlemsId(medlemsId);
                     if (medlemNavn == null) {
                         System.out.println("MedlemsID ikke fundet.");
                         return;
@@ -345,7 +323,6 @@ public class MedlemsRegistering {
                     }
                         System.out.println("Hvor hurtigt svømmede personen? I format Minut.Sekund");
 
-
                         // while loop igen for at man kan indtaste en tid indtil man inputter en korrekt tid
                         while (true) {
                             speedo = keyboard.nextLine();
@@ -370,7 +347,6 @@ public class MedlemsRegistering {
                             catch (NumberFormatException e){
                                 System.out.println("Ugyldigt input. Indtast tid i Minut.Sekunder. (f.eks 2.30");
                             }
-
                             } else {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund (f.eks. 2.30)");
                             }
@@ -379,11 +355,6 @@ public class MedlemsRegistering {
                             } catch (NumberFormatException p) {
                                 System.out.println("Ugyldigt input. Indtast tid som Minut.Sekund");
                             }
-                            //Bruges til at lave første bogstav i et navn stort.
-                            /*String firstLetter= navn.substring(0, 1);
-                            firstLetter=firstLetter.toUpperCase();
-                            String restOfWord=navn.substring(1);
-                            String stortBogstav= firstLetter+restOfWord;*/
 
                             stævnePlacering = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Disciplin: " + disciplin + ", Placering: " + placering + ", Tid  " + speedo;
                             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
@@ -395,10 +366,18 @@ public class MedlemsRegistering {
                                 throw new RuntimeException(t);
                             }
                             System.out.println("Vil du registrere flere svømmere? (Ja/Nej)");
-                            yapping = keyboard.nextLine();
-                            if (yapping.equalsIgnoreCase("Ja")) {
-                                continue;
-                            } else keepSwimming = false;
+                            while (true) {
+                                yapping = keyboard.nextLine();
+                                if (yapping.equalsIgnoreCase("Ja")) {
+                                    break;
+                                } else if (yapping.equalsIgnoreCase("Nej")) {
+                                    System.out.println();
+                                    keepSwimming = false;
+                                    break;
+                                }else {
+                                    System.out.println("Skriv Ja eller Nej");
+                                }
+                            }
                         }
                     }
 
@@ -483,31 +462,4 @@ public class MedlemsRegistering {
                     System.out.println("fejl under læsning");
         }
     }
-    public static void main(String[] args) {
-        visKonkurrencer();
-        Scanner scanner = new Scanner(System.in);
-        konkurrenceStævne();
-
-        while (true) {
-            System.out.println("Vælg en mulighed:");
-            System.out.println("1. Tilføj nyt medlem");
-            System.out.println("2. Vis alle medlemmer");
-            System.out.println("3. Afslut");
-
-            int valg = scanner.nextInt();
-
-            switch (valg) {
-                case 1: tilføjMedlem(); break;
-                case 2: visMedlemmer();
-                    System.out.println();break;
-
-                case 3: {
-                    System.out.println("Afslutter programmet.");
-                    return;
-                }
-                default: System.out.println("Ugyldigt valg, prøv igen.");
-            }
-        }
-    }
-
 }
