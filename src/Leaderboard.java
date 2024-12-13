@@ -5,8 +5,8 @@ import java.util.*;
 
 public class Leaderboard {
 
-    private static final String TRÆNING_FIL = "src/TekstFiler/Træningstider.txt";
-    private static List<Træning> træninger = new ArrayList<>();
+     static final String TRÆNING_FIL = "src/TekstFiler/Træningstider.txt";
+     static List<Træning> træninger = new ArrayList<>();
 
 
     static class Træning {
@@ -51,24 +51,40 @@ public class Leaderboard {
         }
     }
 
-    // Læs træningstider fra fil
     public static void læsTræningstiderFraFil() {
         try (BufferedReader reader = new BufferedReader(new FileReader(TRÆNING_FIL))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                // Kun inkluder linjer, der indeholder "Alder"
+                if (!line.contains("Alder:")) {
+                    continue; // Springer linjen over
+                }
+
                 // Split dataen op
                 String[] parts = line.split(", ");
-                if (parts.length == 5) {
-                    String navn = parts[1].split(": ")[1];
-                    String disciplin = parts[3].split(": ")[1];
-                    String dato = parts[2].split(": ")[1];
-                    double træningstid = Double.parseDouble(parts[4].split(": ")[1]);
-                    int medlemsId = Integer.parseInt(parts[0].split(": ")[1]);
+                String navn = null, disciplin = null, dato = null;
+                double træningstid = -1;
+                int medlemsId = -1, alder = -1;
 
-                    // Find medlemmet med medlemsId og alder fra medlemmer.txt
-                    int alder = findAlderByMedlemsId(medlemsId);
+                for (String part : parts) {
+                    if (part.startsWith("Navn: ")) {
+                        navn = part.split(": ")[1];
+                    } else if (part.startsWith("Disciplin: ")) {
+                        disciplin = part.split(": ")[1];
+                    } else if (part.startsWith("Dato: ")) {
+                        dato = part.split(": ")[1];
+                    } else if (part.startsWith("Træningstid: ")) {
+                        træningstid = Double.parseDouble(part.split(": ")[1]);
+                    } else if (part.startsWith("MedlemsID: ")) {
+                        medlemsId = Integer.parseInt(part.split(": ")[1]);
+                    } else if (part.startsWith("Alder: ")) {
+                        alder = Integer.parseInt(part.split(": ")[1]);
+                    }
+                }
 
-                    Træning træning = new Træning(navn, disciplin, dato, træningstid, alder, medlemsId);  // Inkluder medlemsId
+                // Opret kun træning, hvis alle nødvendige data er tilgængelige
+                if (navn != null && disciplin != null && dato != null && træningstid > 0 && medlemsId > 0 && alder > 0) {
+                    Træning træning = new Træning(navn, disciplin, dato, træningstid, alder, medlemsId);
                     træninger.add(træning);
                 }
             }
@@ -131,7 +147,7 @@ public class Leaderboard {
     }
 
     // Vis de 5 bedste træningstider
-    private static void visTop5(List<Træning> træninger, String gruppe) {
+     static void visTop5(List<Træning> træninger, String gruppe) {
         Map<String, List<Træning>> discipliner = new TreeMap<>();  // Jeg har brugt TreeMap da den holder ordning
 
         // sorterer træningerne i discipliner
@@ -160,9 +176,10 @@ public class Leaderboard {
 
     public static void main(String[] args) {
         læsTræningstiderFraFil();
-
+        System.out.println("Antal træningstider: " + træninger.size());
+        System.out.println(træninger);
         Scanner scanner = new Scanner(System.in);
-         while (true) {
+        while (true) {
 
 
             int valg = 0;
@@ -171,16 +188,16 @@ public class Leaderboard {
                 System.out.println("1. Se Under 18 leaderboard");
                 System.out.println("2. Se Senior leaderboard");
                 System.out.println("3. Afslut");
-               try {
-                   valg = Integer.parseInt(scanner.nextLine());
-               }  catch (Exception e){
-                   System.out.println("Fejl");
-               }
-               if (valg==1||valg==2){
-                   break;
-               }
+                try {
+                    valg = Integer.parseInt(scanner.nextLine());
+                }  catch (Exception e){
+                    System.out.println("Fejl");
+                }
+                if (valg==1||valg==2){
+                    break;
+                }
 
-               if (valg == 3) {
+                if (valg == 3) {
                     return;
                 } else if (valg<=0 || valg>=4){
 
@@ -251,13 +268,9 @@ public class Leaderboard {
             while (true) {
                 System.out.println("Indtast træningens dato (format: dd-mm-yyyy):");
                 dato = sc.nextLine();
-
                 // Tjek om datoen er gyldig
-                if (erGyldigDato(dato)) {
-                    break;
-                } else {
-                    System.out.println("Ugyldig dato, prøv igen.");
-                }
+                if (erGyldigDato(dato)) break;
+                System.out.println("Ugyldig dato, prøv igen.");
             }
 
             System.out.println("Indtast disciplin (f.eks. Crawl, Ryg, Bryst, Butterfly):");
@@ -295,20 +308,24 @@ public class Leaderboard {
             }
 
 
-                String træningData = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Alder: " + alder +
-                        ", Dato: " + dato + ", Disciplin: " + disciplin + ", Træningstid: " + træningstidInput;
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(TRÆNING_FIL, true))) {
-                    writer.write(træningData);
-                    writer.newLine();
-                    System.out.println("Træningstid for " + medlemNavn + " er oprettet.");
-                    System.out.println();
-                } catch (IOException e) {
-                    System.out.println("Fejl ved skrivning til træningstidfil.");
-                }
+            String træningData = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Alder: " + alder +
+                    ", Dato: " + dato + ", Disciplin: " + disciplin + ", Træningstid: " + træningstidInput;
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(TRÆNING_FIL, true))) {
+                writer.write(træningData);
+                writer.newLine();
+                System.out.println("Træningstid for " + medlemNavn + " er oprettet.");
+                System.out.println();
+            } catch (IOException e) {
+                System.out.println("Fejl ved skrivning til træningstidfil.");
+            }
+
+            // Genindlæs filens data for at opdatere listen træninger
+            træninger.clear(); // Ryd listen først
+            læsTræningstiderFraFil(); // Genindlæs data fra filen
 
         }
 
-            public static void main(String[] args) {
+        public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
 
             while (true) {

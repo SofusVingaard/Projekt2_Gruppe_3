@@ -261,6 +261,7 @@ public class MedlemsRegistering {
                     System.out.println("Ugyldig dato, prøv igen.");
                 }
             }
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(KONKURRENCE, true))) {
 
                 // Indtaster stævnets navn og gemmer det
@@ -463,3 +464,4 @@ public class MedlemsRegistering {
         }
     }
 }
+

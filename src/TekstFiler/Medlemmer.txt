@@ -16,3 +16,7 @@ Medlemsnummer: 14 Navn: christoffer, Alder: 99999, Medlemsskab: Passiv, Aldersgr
 Medlemsnummer: 14 Navn: carl, Alder: 16, Medlemsskab: Aktiv, Aldersgruppe: Junior, Betalt
 Medlemsnummer: 15 Navn: bo, Alder: 17, Medlemsskab: Aktiv, Aldersgruppe: Junior, Betalt
 Medlemsnummer: 16 Navn: cas, Alder: 12, Medlemsskab: Aktiv, Aldersgruppe: Junior, Betalt
+Medlemsnummer: 17 Navn: Sebastian, Alder: 23, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt, Motionssvømmer
+Medlemsnummer: 18 Navn: Andreas, Alder: 23, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt, Motionssvømmer
+Medlemsnummer: 19 Navn: Thomas, Alder: 23, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt, Konkurrence svømmer i bryst
+Medlemsnummer: 20 Navn: Mo, Alder: 24, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt, Konkurrence svømmer i ryg
