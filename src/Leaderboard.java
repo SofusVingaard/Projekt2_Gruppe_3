@@ -2,6 +2,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Leaderboard {
 
@@ -147,30 +148,27 @@ public class Leaderboard {
     }
 
     // Vis de 5 bedste træningstider
-     static void visTop5(List<Træning> træninger, String gruppe) {
-        Map<String, List<Træning>> discipliner = new TreeMap<>();  // Jeg har brugt TreeMap da den holder ordning
-
-        // sorterer træningerne i discipliner
+    static void visTop5(List<Træning> træninger, String gruppe) {
+        Map<String, List<Træning>> discipliner = new TreeMap<>();
         for (Træning træning : træninger) {
             discipliner.putIfAbsent(træning.getDisciplin(), new ArrayList<>());
             discipliner.get(træning.getDisciplin()).add(træning);
         }
 
-        // For hver disciplin, få de 5 bedste og vis dem
         System.out.println(gruppe + " leaderboard:");
         for (Map.Entry<String, List<Træning>> entry : discipliner.entrySet()) {
             System.out.println("Disciplin: " + entry.getKey());
 
-            List<Træning> disciplineTræninger = entry.getValue();
-            int count = 0;
+            List<Træning> disciplineTræninger = entry.getValue().stream()
+                    .distinct()
+                    .limit(5) // Begræns til de første 5
+                    .collect(Collectors.toList());
+
             for (Træning træning : disciplineTræninger) {
-                if (count < 5) {
-                    System.out.println("MedlemsID: " + træning.getMedlemsId() + " - " + træning.getNavn()
-                            + " - Tid: " + træning.getTræningstid() + " - Dato: " + træning.getDato());
-                    count++;
-                }
+                System.out.println("MedlemsID: " + træning.getMedlemsId() + " - " + træning.getNavn()
+                        + " - Tid: " + træning.getTræningstid() + " - Dato: " + træning.getDato());
             }
-            System.out.println(); // Tilføj en ny linje efter hver disciplin yessir
+            System.out.println();
         }
     }
 
