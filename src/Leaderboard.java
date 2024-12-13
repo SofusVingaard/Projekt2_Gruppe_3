@@ -195,6 +195,7 @@ public class Leaderboard {
                 }
 
                 if (valg == 3) {
+                    træninger.clear();
                     return;
                 } else if (valg<=0 || valg>=4){
 
