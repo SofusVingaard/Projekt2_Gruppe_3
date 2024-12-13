@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -205,24 +206,35 @@ public class SwimShop {
                 break;
             }
         }
-
-        // Betaling
-        System.out.println("Indtast beløb som bliver betalt nu:");
-            double amountPaid = scanner.nextDouble();
-
-            Revenue payment = new Revenue(customerId, amountPaid, selectedProducts);
-            payment.calculateChange(totalPrice);
-
-            System.out.println("Betaling godkendes... ");
-            System.out.println(payment);
+        while (true) {
+            // Betaling
+            System.out.println("Indtast beløb som bliver betalt nu:");
+            try {
+                double amountPaid = scanner.nextDouble();
 
 
-            if (amountPaid >= totalPrice) {
-                System.out.println("Tak for betalingen " + customerId + "!" + " Tilbagebetaling: " + payment.getChange() + " kr.");
-                payment.betalingshistorik(); //gemmer kvittering ved if så den ikke gemmer information når der bliver afvist
-            } else {
-                System.out.println("AFVIST");
+                Revenue payment = new Revenue(customerId, amountPaid, selectedProducts);
+                payment.calculateChange(totalPrice);
+
+
+                System.out.println("Betaling godkendes... ");
+                System.out.println(payment);
+
+
+                if (amountPaid >= totalPrice) {
+                    System.out.println("Tak for betalingen " + customerId + "!" + " Tilbagebetaling: " + payment.getChange() + " kr.");
+                    payment.betalingshistorik(); //gemmer kvittering ved if så den ikke gemmer information når der bliver afvist
+                    break;
+                } else {
+                    System.out.println("AFVIST");
+                    System.out.println("Du skal betale "+totalPrice);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Du skal indtaste et tal");
+                System.out.println("Betaling lyder på "+totalPrice);
+                scanner.nextLine();
             }
+        }
 
     }
 
