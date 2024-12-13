@@ -1,0 +1,5 @@
+OL 2024
+Dato: 20-07-2024
+MedlemsID: 3, Navn: Sofus, Disciplin: ryg, Placering: 1, Tid  1.01
+MedlemsID: 2, Navn: Christoffer, Disciplin: butterfly, Placering: 1, Tid  1.15
+MedlemsID: 9, Navn: Malene, Disciplin: butterfly, Placering: 1, Tid  2.01

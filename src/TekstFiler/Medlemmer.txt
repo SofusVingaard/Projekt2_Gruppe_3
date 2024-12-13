@@ -1,1 +1,9 @@
+Medlemsnummer: 1 Navn: Lars, Alder: 39, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt, Konkurrence svømmer i ryg
 Medlemsnummer: 2 Navn: Christoffer, Alder: 24, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt, Konkurrence svømmer i bryst
+Medlemsnummer: 3 Navn: Sofus, Alder: 27, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt, Konkurrence svømmer i crawl
+Medlemsnummer: 4 Navn: Charlie, Alder: 8, Medlemsskab: Passiv, Aldersgruppe: Junior, Ikke betalt
+Medlemsnummer: 5 Navn: Jørgen, Alder: 71, Medlemsskab: Aktiv, Aldersgruppe: 60+, Ikke betalt, Motionssvømmer
+Medlemsnummer: 6 Navn: Lis, Alder: 67, Medlemsskab: Passiv, Aldersgruppe: 60+, Betalt
+Medlemsnummer: 7 Navn: Henrik, Alder: 49, Medlemsskab: Aktiv, Aldersgruppe: Senior, Betalt, Konkurrence svømmer i butterfly
+Medlemsnummer: 8 Navn: Theo, Alder: 2, Medlemsskab: Passiv, Aldersgruppe: Junior, Ikke betalt
+Medlemsnummer: 9 Navn: Malene, Alder: 29, Medlemsskab: Aktiv, Aldersgruppe: Senior, Ikke betalt, Motionssvømmer

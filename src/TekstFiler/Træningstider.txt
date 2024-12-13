@@ -1,1 +1,3 @@
 MedlemsID: 2, Navn: Christoffer, Alder: 24, Dato: 12-12-24, Disciplin: bryst, Træningstid: 05.11
+MedlemsID: 3, Navn: Sofus, Alder: 27, Dato: 13-12-2024, Disciplin: crawl, Træningstid: 1.04
+MedlemsID: 9, Navn: Malene, Alder: 29, Dato: 15-10-2024, Disciplin: butterfly, Træningstid: 3.01
