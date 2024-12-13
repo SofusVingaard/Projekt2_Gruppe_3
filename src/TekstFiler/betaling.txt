@@ -1,0 +1,6 @@
+Kontigentpriser:
+Junior: 1000
+Senior: 1600
+Passiv: 500
+
+Betalingshistorik
