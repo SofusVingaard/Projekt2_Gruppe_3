@@ -14,7 +14,7 @@ public class MedlemsRegistering {
     private static final String AKTIV="Medlemsskab: Aktiv";
     private static final String PASSIV="Medlemsskab: Passiv";
     static final String MEDLEMSID="Medlemsnummer: ";
-    static final String KONKURRENCE="src/TekstFiler/Konkurrence stævner";
+    static final String KONKURRENCE="src/TekstFiler/KonkurrenceStævner.txt";
     private static final String BRYST= "Bryst";
     private static final String CRAWL="Crawl";
     private static final String BUTTERFLY= "Butterfly";
@@ -104,7 +104,7 @@ public class MedlemsRegistering {
                         System.out.println("Skrive din alder");
                     }
                     break;
-                } else if (alder >= 60) {
+                } else if (alder >= 60 && alder<=100) {
                     svømmekategori = "60+";
                     // læs kommentar fra junior
                     try (BufferedReader reader = new BufferedReader(new FileReader(KONTIGENT))) {
@@ -128,7 +128,7 @@ public class MedlemsRegistering {
                     }
                     break;
                 } else {
-                    System.out.println("Indtast venligst en alder der er over 0 ");
+                    System.out.println("Indtast venligst en alder der er over 0 og under 101");
                 }
             }
             catch (InputMismatchException e){

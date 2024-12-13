@@ -4,10 +4,3 @@ Senior: 1600
 Passiv: 500
 
 Betalingshistorik
-Customer ID: Bjørn, Amount Paid: 6000.0, Change: 5485.0, Purchased items: Håndklæde (5.0kr.), Badetøj til Mænd (300.0kr.)
-Customer ID: Christoffer, Amount Paid: 1800.0, Change: 800.0, Purchased items: Badetøj til Børn (1000.0kr.)
-Customer ID: Sofus, Amount Paid: 2300.0, Change: 240.0, Purchased items: Badetøj til Børn (1000.0kr.), Badetøj til Børn (1000.0kr.)
-Customer ID: Thomas, Amount Paid: 831.0, Change: 1.0, Purchased items: Badetøj til Kvinder (800.0kr.)
-Customer ID: Gustavo, Amount Paid: 2000.0, Change: 170.0, Purchased items: Badetøj til Kvinder (800.0kr.), Badetøj til Børn (1000.0kr.)
-Customer ID: HVEM KAN EMIR KAN ikke, Amount Paid: 62.0, Change: 7.0, Purchased items: Håndklæde (5.0kr.)
-Customer ID: Mj, Amount Paid: 455.0, Change: 0.0, Purchased items: Håndklæde (5.0kr.), Svømmebriller (400.0kr.)
