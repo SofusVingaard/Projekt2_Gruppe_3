@@ -14,7 +14,7 @@ public class MedlemsRegistering {
     private static final String AKTIV="Medlemsskab: Aktiv";
     private static final String PASSIV="Medlemsskab: Passiv";
     static final String MEDLEMSID="Medlemsnummer: ";
-    static final String KONKURRENCE="src/TekstFiler/Konkurrence stævner";
+    static final String KONKURRENCE="src/TekstFiler/KonkurrenceStævner.txt";
     private static final String BRYST= "Bryst";
     private static final String CRAWL="Crawl";
     private static final String BUTTERFLY= "Butterfly";
