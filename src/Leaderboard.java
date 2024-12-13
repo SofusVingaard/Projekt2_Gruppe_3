@@ -9,7 +9,7 @@ public class Leaderboard {
      static final String TRÆNING_FIL = "src/TekstFiler/Træningstider.txt";
      static List<Træning> træninger = new ArrayList<>();
 
-
+    // Træning klasse, der gemmer information om træning
     static class Træning {
         private String navn;
         private String disciplin;
@@ -18,6 +18,7 @@ public class Leaderboard {
         private int alder;
         private int medlemsId;
 
+        //Konstruktor til at oprette en Træning
         public Træning(String navn, String disciplin, String dato, double træningstid, int alder, int medlemsId) {
             this.navn = navn;
             this.disciplin = disciplin;
@@ -51,12 +52,12 @@ public class Leaderboard {
             return medlemsId;  // Hent medlemsId
         }
     }
-
+    // Metode til at læse træningstider fra filen
     public static void læsTræningstiderFraFil() {
         try (BufferedReader reader = new BufferedReader(new FileReader(TRÆNING_FIL))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Kun inkluder linjer, der indeholder "Alder"
+                // Kun inkluder linjer, der indeholder "Alder", der var problemer da vi i starten ikke havde alder med i træningstider.txt så det her skulle være med så den kunne håndtere alt
                 if (!line.contains("Alder:")) {
                     continue; // Springer linjen over
                 }
@@ -67,6 +68,7 @@ public class Leaderboard {
                 double træningstid = -1;
                 int medlemsId = -1, alder = -1;
 
+                //vi tager de relevante dataer
                 for (String part : parts) {
                     if (part.startsWith("Navn: ")) {
                         navn = part.split(": ")[1];
@@ -94,7 +96,7 @@ public class Leaderboard {
         }
     }
 
-    // Find medlemmers alder
+    // Find medlemmers alder, ved at læse det fra medlemmer.txt
     static int findAlderByMedlemsId(int medlemsId) {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/TekstFiler/Medlemmer.txt"))) {
             String line;
@@ -147,7 +149,7 @@ public class Leaderboard {
         }
     }
 
-    // Vis de 5 bedste træningstider
+    // Metode til at vise de 5 bedste træningstider
     static void visTop5(List<Træning> træninger, String gruppe) {
         Map<String, List<Træning>> discipliner = new TreeMap<>();
         for (Træning træning : træninger) {
@@ -159,6 +161,7 @@ public class Leaderboard {
         for (Map.Entry<String, List<Træning>> entry : discipliner.entrySet()) {
             System.out.println("Disciplin: " + entry.getKey());
 
+            //filtrerer for at få de 5 bedste
             List<Træning> disciplineTræninger = entry.getValue().stream()
                     .distinct()
                     .limit(5) // Begræns til de første 5
@@ -173,6 +176,7 @@ public class Leaderboard {
     }
 
     public static void main(String[] args) {
+        //læse træningstider fra filen
         læsTræningstiderFraFil();
 
         Scanner scanner = new Scanner(System.in);
@@ -181,6 +185,7 @@ public class Leaderboard {
 
             int valg = 0;
             while (true) {
+                //mulighederne brugeren har
                 System.out.println("Vælg en mulighed:");
                 System.out.println("1. Se Under 18 leaderboard");
                 System.out.println("2. Se Senior leaderboard");
@@ -202,15 +207,15 @@ public class Leaderboard {
                 } else {
                 }
             }
-            visLeaderboard(valg);
+            visLeaderboard(valg); //viser leaderboardet baseseret på hvad brugeren har valgt
         }
     }
-
+//klasse til træningstider
     public static class Træningstider {
         static final String MEDLEMMER_FIL = "src/TekstFiler/Medlemmer.txt";
         static final String TRÆNING_FIL = "src/TekstFiler/Træningstider.txt";
 
-
+//henter medlemmets navn ved hjælp af medlemsid
         public static String findMedlemNavn(int medlemsId) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(MEDLEMMER_FIL));
@@ -244,14 +249,14 @@ public class Leaderboard {
             }
         }
 
-
+        //opretter en ny træningstid
         public static void opretTræningstid() {
             Scanner sc = new Scanner(System.in);
 
-            // Træningstid for eksisterende medlem
+
             System.out.println("Indtast medlemsID:");
             int medlemsId = sc.nextInt();
-            sc.nextLine(); // Fjern newline karakteren efter nextInt
+            sc.nextLine();
 
             // Hent medlem ved medlemsID
             String medlemNavn = findMedlemNavn(medlemsId);
@@ -261,7 +266,7 @@ public class Leaderboard {
                 return;
             }
 
-
+            // håndtere dato
             String dato;
             while (true) {
                 System.out.println("Indtast træningens dato (format: dd-mm-yyyy):");
@@ -270,7 +275,7 @@ public class Leaderboard {
                 if (erGyldigDato(dato)) break;
                 System.out.println("Ugyldig dato, prøv igen.");
             }
-
+            // sørger for vi for den rigtige disciplin input
             System.out.println("Indtast disciplin (f.eks. Crawl, Ryg, Bryst, Butterfly):");
             String disciplin;
             while (true) {
@@ -305,7 +310,7 @@ public class Leaderboard {
                 }
             }
 
-
+            // skriv træningstiden til fil
             String træningData = "MedlemsID: " + medlemsId + ", Navn: " + medlemNavn + ", Alder: " + alder +
                     ", Dato: " + dato + ", Disciplin: " + disciplin + ", Træningstid: " + træningstidInput;
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(TRÆNING_FIL, true))) {
