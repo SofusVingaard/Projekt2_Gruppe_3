@@ -4,9 +4,18 @@ Senior: 1600
 Passiv: 500
 
 Betalingshistorik
-Customer ID: Bjørn, Amount Paid: 6000.0, Change: 5485.0, Purchased items: Håndklæde (5.0kr.), Badetøj til Mænd (300.0kr.)
-Customer ID: Christoffer, Amount Paid: 1800.0, Change: 800.0, Purchased items: Badetøj til Børn (1000.0kr.)
-Customer ID: Sofus, Amount Paid: 2300.0, Change: 240.0, Purchased items: Badetøj til Børn (1000.0kr.), Badetøj til Børn (1000.0kr.)
-Customer ID: Thomas, Amount Paid: 831.0, Change: 1.0, Purchased items: Badetøj til Kvinder (800.0kr.)
-Customer ID: Gustavo, Amount Paid: 2000.0, Change: 170.0, Purchased items: Badetøj til Kvinder (800.0kr.), Badetøj til Børn (1000.0kr.)
-Customer ID: HVEM KAN EMIR KAN ikke, Amount Paid: 62.0, Change: 7.0, Purchased items: Håndklæde (5.0kr.)
+Customer ID: Mj, Amount Paid: 400.0, Change: 325.0
+Customer ID: , Amount Paid: 50.0, Change: 44.0
+Customer ID: Dana, Amount Paid: 50.0, Change: 0.0
+Customer ID: Dana White, Amount Paid: 500.0, Change: 494.0
+Customer ID: LadyBoy, Amount Paid: 55.0, Change: 0.0
+Customer ID: HVemKANEMIRKAN, Amount Paid: 301.0, Change: 0.0
+Customer ID: Jon "Bones" Jones, Amount Paid: 1000.0, Change: 130.0
+Customer ID: IceKiid, Amount Paid: 80.0, Change: 5.0
+Customer ID: Bjørn, Amount Paid: 10000.0, Change: 9550.0
+Customer ID: Thomas, Amount Paid: 850.0, Change: 0.0
+Customer ID: 123, Amount Paid: 20.0, Change: 15.0
+Customer ID: christoffer, Amount Paid: 55.0, Change: 0.0
+Customer ID: mj, Amount Paid: 370.0, Change: 0.0
+Customer ID: WORLDSTAR, Amount Paid: 2000.0, Change: 100.0
+Customer ID: Khabib Nurmagomedov, Amount Paid: 5000.0, Change: 1274.0, Purchased items: Håndklæde (5.0kr.), Håndklæde (5.0kr.), Håndklæde (5.0kr.), Håndklæde (5.0kr.), Håndklæde (5.0kr.), Badetøj til Mænd (300.0kr.), Badetøj til Kvinder (800.0kr.), Badetøj til Børn (1000.0kr.), Badetøj til Børn (1000.0kr.), Svømmebriller (400.0kr.)

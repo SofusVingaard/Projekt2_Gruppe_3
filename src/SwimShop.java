@@ -94,8 +94,7 @@ public class SwimShop {
             System.out.println("Vælg en af de følgende (0 for at stoppe):");
             System.out.println("1. Dailypass for Voksne (70 kr.)");
             System.out.println("2. Dailypass for Børn (30 kr.)");
-            System.out.println("3. Dailypass for Senior/Studerende (50 kr.)");
-            System.out.println("4. Dailypass for Joe Rogan (1 kr.)");
+            System.out.println("3. Dailypass for 60+/Studerende (50 kr.)");
             System.out.println("0. Færdig med at vælge dailypasses");
 
             try {
@@ -116,9 +115,6 @@ public class SwimShop {
                         break;
                     case 3:
                         dailyPassPrice = 50;
-                        break;
-                    case 4:
-                        dailyPassPrice = 1;
                         break;
                     default:
                         System.out.println("Ugyldigt valg");

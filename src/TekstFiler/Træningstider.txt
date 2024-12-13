@@ -9,3 +9,4 @@ MedlemsID: 14, Navn: christoffer, Dato: 22-11-1999, Disciplin: bryst, Træningst
 MedlemsID: 16, Navn: cas, Alder: 12, Dato: 13-11-2024, Disciplin: ryg, Træningstid: 2.30
 MedlemsID: 14, Navn: christoffer, Alder: 99999, Dato: 20-08-2001, Disciplin: crawl, Træningstid: 2.45
 MedlemsID: 15, Navn: bo, Alder: 17, Dato: 20-02-2023, Disciplin: ryg, Træningstid: 2.55
+MedlemsID: 17, Navn: Sif, Alder: 194567, Dato: 31-12-2005, Disciplin: bryst, Træningstid: 1.1
