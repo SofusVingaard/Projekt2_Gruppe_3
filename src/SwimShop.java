@@ -47,7 +47,7 @@ public class SwimShop {
             }
         }
 
-        //Udregning af tilbagebetaling - change
+        //Udregning af tilbagebetaling/change
         public void calculateChange(double serviceCost) {
             if (amountPaid >= serviceCost) {
                 change = amountPaid - serviceCost;
