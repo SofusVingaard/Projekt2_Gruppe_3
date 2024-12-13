@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SwimShop {
-    //private static final double dailyPass = 0;
+    //Klasse til at reprænsentere varer i butikken
     private static class Vare {
         private String navn;
         private double pris;
@@ -15,15 +15,14 @@ public class SwimShop {
             this.navn = navn;
             this.pris = pris;
         }
-
         public String getNavn() {
             return navn;
         }
-
         public double getPris() {
             return pris;
         }
     }
+    //klasse til at reprænsentere betalingsinfo samt kvittering
     private static class Revenue {
         final private String customerId;
         final private double amountPaid;
@@ -37,6 +36,7 @@ public class SwimShop {
             this.kvittering = kvittering;
         }
 
+        //Skriver betalingshistorik ind i en tekstfil
         public void betalingshistorik() {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/TekstFiler/betaling.txt", true))) {
                 writer.write(this.toString());
@@ -45,6 +45,8 @@ public class SwimShop {
                 System.out.println("Fejl ved skrivning: " + e.getMessage());
             }
         }
+
+        //Udregning af tilbagebetaling - change
         public void calculateChange(double serviceCost) {
             if (amountPaid >= serviceCost) {
                 change = amountPaid - serviceCost;
@@ -52,13 +54,13 @@ public class SwimShop {
                 change = 0.0;
             }
         }
-        public String getCustomerId() {
+       /* public String getCustomerId() {
             return customerId;
-        }
+        }*/
 
-        public double getAmountPaid() {
+       /* public double getAmountPaid() {
             return amountPaid;
-        }
+        }*/
 
         public double getChange() {
             return change;
@@ -79,10 +81,13 @@ public class SwimShop {
                     ", Purchased items: " + itemsString.toString();
         }
     }
+    //Start
     public static void startService() {
         Scanner scanner = new Scanner(System.in);
         List<Double> selectedDailyPasses = new ArrayList<>();
         List<Vare> selectedProducts = new ArrayList<>();
+
+        //valg af engangsbilletter
         while (true) {
             System.out.println("Velkommen til Delfin");
             System.out.println("Vælg en af de følgende (0 for at stoppe):");
@@ -121,7 +126,7 @@ public class SwimShop {
                 selectedDailyPasses.add(dailyPassPrice);
             } catch (Exception e) {
                 System.out.println("Der opstod en fejl: " + e.getMessage());
-                scanner.nextLine(); //rydder buffer så den ikke bliver ved mere
+                scanner.nextLine(); //rydder buffer så den ikke looper uendeligt
             }
 
         }
@@ -137,14 +142,10 @@ public class SwimShop {
             System.out.println("0. Færdig med at vælge produkter");
 
             try {
-
-
                 int addOn = scanner.nextInt();
-
                 if (addOn == 0) {
                     break;
                 }
-
                 Vare selectedProduct = null;
                 switch (addOn) {
                     case 1:
@@ -174,19 +175,21 @@ public class SwimShop {
         }
 
 
-        // Kvitteringen
-        double totalDailyPassPrice = selectedDailyPasses.stream().mapToDouble(Double::doubleValue).sum();
-        double totalProductPrice = selectedProducts.stream().mapToDouble(Vare::getPris).sum();
+        // Beregner og viser kvitteringen
+
+        double totalDailyPassPrice = selectedDailyPasses.stream().mapToDouble(Double::doubleValue).sum(); // beregner den samelede værdi af dailypasses
+        double totalProductPrice = selectedProducts.stream().mapToDouble(Vare::getPris).sum(); // beregner den samlede værdi af produkter
 
         System.out.println("Valgte dailypasses:");
-        selectedDailyPasses.forEach(pass -> System.out.println(pass + " kr."));
+        selectedDailyPasses.forEach(pass -> System.out.println(pass + " kr.")); // skriver en liste over de valgte dailypasses med priser
 
         System.out.println("Valgte produkter:");
-        selectedProducts.forEach(product -> System.out.println(product.getNavn() + " (" + product.getPris() + " kr.)"));
+        selectedProducts.forEach(product -> System.out.println(product.getNavn() + " (" + product.getPris() + " kr.)")); // skriver en liste over de valgte produkter med deres navne samt priser
 
-        System.out.println("Samlet pris for dailypasses: " + totalDailyPassPrice + " kr.");
-        System.out.println("Samlet pris for produkter: " + totalProductPrice + " kr.");
-        double totalPrice = totalDailyPassPrice + totalProductPrice;
+        System.out.println("Samlet pris for dailypasses: " + totalDailyPassPrice + " kr."); // den samlede pris for dailypasses
+        System.out.println("Samlet pris for produkter: " + totalProductPrice + " kr."); //  den samlede pris for produkter
+        // Beregner og udskriver den samlede pris for alt
+        double totalPrice = totalDailyPassPrice + totalProductPrice;  //samler priserne for dailypasses og produkter
         System.out.println("Total pris: " + totalPrice + " kr.");
 
         // Navn input
@@ -205,22 +208,22 @@ public class SwimShop {
 
         // Betaling
         System.out.println("Indtast beløb som bliver betalt nu:");
-        double amountPaid = scanner.nextDouble();
+            double amountPaid = scanner.nextDouble();
 
-        // Opret payment objekt
-        Revenue payment = new Revenue(customerId, amountPaid, selectedProducts);
-        payment.calculateChange(totalPrice);
+            Revenue payment = new Revenue(customerId, amountPaid, selectedProducts);
+            payment.calculateChange(totalPrice);
 
-        System.out.println("Betaling gennemført: ");
-        System.out.println(payment);
+            System.out.println("Betaling godkendes... ");
+            System.out.println(payment);
 
-        if (amountPaid >= totalPrice) {
-            System.out.println("Tak for betalingen " + customerId + "!" + " Tilbagebetaling: " + payment.getChange() + " kr.");
-        } else {
-            System.out.println("AFVIST");
-        }
 
-        payment.betalingshistorik();
+            if (amountPaid >= totalPrice) {
+                System.out.println("Tak for betalingen " + customerId + "!" + " Tilbagebetaling: " + payment.getChange() + " kr.");
+                payment.betalingshistorik(); //gemmer kvittering ved if så den ikke gemmer information når der bliver afvist
+            } else {
+                System.out.println("AFVIST");
+            }
+
     }
 
     public static void main(String[] args) {
