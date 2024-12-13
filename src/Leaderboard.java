@@ -176,8 +176,7 @@ public class Leaderboard {
 
     public static void main(String[] args) {
         læsTræningstiderFraFil();
-        System.out.println("Antal træningstider: " + træninger.size());
-        System.out.println(træninger);
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
 
